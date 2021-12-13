@@ -64,6 +64,18 @@ ggplot(data=bike_data, aes(x = Hour, y = Rented.Bike.Count, colour = Year)) +
    stat_summary(geom = "point", fun.y = mean)
 ```
 ```{r}
+library(Boruta)
+bike_data <- bike_data[, -1]
+boruta.train <- Boruta(Rented.Bike.Count~.,data=bike_data, doTrace = 2)
+ plot(boruta.train, xlab = "", xaxt = "n")
+ lz<-lapply(1:ncol(boruta.train$ImpHistory),function(i)
+boruta.train$ImpHistory[is.finite(boruta.train$ImpHistory[,i]),i])
+ names(lz) <- colnames(boruta.train$ImpHistory)
+ Labels <- sort(sapply(lz,median))
+ axis(side = 1,las=2,labels = names(Labels),
+at = 1:ncol(boruta.train$ImpHistory), cex.axis = 0.7)
+```
+```{r}
 ## split data into a train and test set
 index <- 1:nrow(bike_data)
 testindex <- sample(index, trunc(length(index)*0.2))
