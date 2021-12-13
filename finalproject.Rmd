@@ -1,6 +1,6 @@
 ---
 title: "Biostat625_finalproject"
-author: "Zehua Wang"
+author: "Zehua Wang, Ziman Jiang, Faye Fang, Yue Pan"
 date: "12/7/2021"
 output: html_document
 ---
