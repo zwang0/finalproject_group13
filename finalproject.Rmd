@@ -41,7 +41,10 @@ bike_data$Year = factor(format(bike_data$Date, "%Y"))
 bike_data$Month = factor(months(bike_data$Date))
 bike_data$Day = factor(format(bike_data$Date, "%d"))
 bike_data$DWeek = factor(weekdays(bike_data$Date))
-colnames(bike_data) <- c('Date','Rented_Bike_Count', 'Hour', 'Temperature', 'Humidity', 'Wind_speed', 'Visibility', 'Dew_point_temp', 'Solar_Rad', 'Rainfall', 'Snowfall', 'Seasons', 'Holiday', 'Funct_Day','Year', 'Month', 'Day', 'DWeek')
+colnames(bike_data) <- c('Date','Rented_Bike_Count', 'Hour', 'Temperature',
+                         'Humidity', 'Wind_speed', 'Visibility', 'Dew_point_temp',
+                         'Solar_Rad', 'Rainfall', 'Snowfall', 'Seasons', 
+                         'Holiday', 'Funct_Day','Year', 'Month', 'Day', 'DWeek')
 head(bike_data)
 ```
 
