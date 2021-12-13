@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(tidyverse)
-bike_data = read.csv('/Data/SeoulBikeData.csv')
+bike_data = read.csv('data/SeoulBikeData.csv')
 head(bike_data)
 # Date : year-month-day
 # Rented Bike count - Count of bikes rented at each hour
