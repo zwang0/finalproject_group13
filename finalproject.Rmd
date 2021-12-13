@@ -1,6 +1,6 @@
 ---
 title: "Biostat625_finalproject"
-author: "Zehua Wang"
+author: "Zehua Wang, Ziman Jiang, Faye Fang, Yue Pan"
 date: "12/7/2021"
 output: html_document
 ---
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(tidyverse)
-bike_data = read.csv('SeoulBikeData.csv')
+bike_data = read.csv('/Data/SeoulBikeData.csv')
 head(bike_data)
 # Date : year-month-day
 # Rented Bike count - Count of bikes rented at each hour
@@ -42,7 +42,10 @@ bike_data$Month = factor(months(bike_data$Date))
 bike_data$Day = factor(format(bike_data$Date, "%d"))
 bike_data$DWeek = factor(weekdays(bike_data$Date))
 #rename
-colnames(bike_data) <- c('Date','Rented_Bike_Count', 'Hour', 'Temperature', 'Humidity', 'Wind_speed', 'Visibility', 'Dew_point_temp', 'Solar_Rad', 'Rainfall', 'Snowfall', 'Seasons', 'Holiday', 'Funct_Day','Year', 'Month', 'Day', 'DWeek')
+colnames(bike_data) <- c('Date','Rented_Bike_Count', 'Hour', 'Temperature',
+                         'Humidity', 'Wind_speed', 'Visibility', 'Dew_point_temp',
+                         'Solar_Rad', 'Rainfall', 'Snowfall', 'Seasons', 
+                         'Holiday', 'Funct_Day','Year', 'Month', 'Day', 'DWeek')
 head(bike_data)
 ```
 
