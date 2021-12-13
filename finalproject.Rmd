@@ -1,0 +1,50 @@
+---
+title: "Biostat625_finalproject"
+author: "Zehua Wang"
+date: "12/7/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+bike_data = read.csv('SeoulBikeData.csv')
+head(bike_data)
+# Date : year-month-day
+# Rented Bike count - Count of bikes rented at each hour
+# Hour - Hour of he day
+# Temperature-Temperature in Celsius
+# Humidity - %
+# Windspeed - m/s
+# Visibility - 10m
+# Dew point temperature - Celsius
+# Solar radiation - MJ/m2
+# Rainfall - mm
+# Snowfall - cm
+# Seasons - Winter, Spring, Summer, Autumn
+# Holiday - Holiday/No holiday
+# Functional Day - NoFunc(Non Functional Hours), Fun(Functional hours)
+```
+
+```{r}
+head(bike_data)
+dim(bike_data)
+```
+```{r}
+# add year, month, day, and days of week
+# notice that 
+bike_data$Date = as.Date(bike_data$Date, "%d/%m/%Y")
+bike_data$Year = factor(format(bike_data$Date, "%Y"))
+bike_data$Month = factor(months(bike_data$Date))
+bike_data$Day = factor(format(bike_data$Date, "%d"))
+bike_data$DWeek = factor(weekdays(bike_data$Date))
+head(bike_data)
+```
+
+```{r}
+# plot
+```
+
