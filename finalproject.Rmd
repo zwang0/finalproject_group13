@@ -50,10 +50,6 @@ head(bike_data)
 ```
 
 ```{r}
-# plot
-```
-
-```{r}
 ## split data into a train and test set
 index <- 1:nrow(bike_data)
 testindex <- sample(index, trunc(length(index)*0.2))
