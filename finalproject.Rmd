@@ -41,6 +41,7 @@ bike_data$Year = factor(format(bike_data$Date, "%Y"))
 bike_data$Month = factor(months(bike_data$Date))
 bike_data$Day = factor(format(bike_data$Date, "%d"))
 bike_data$DWeek = factor(weekdays(bike_data$Date))
+#rename
 colnames(bike_data) <- c('Date','Rented_Bike_Count', 'Hour', 'Temperature', 'Humidity', 'Wind_speed', 'Visibility', 'Dew_point_temp', 'Solar_Rad', 'Rainfall', 'Snowfall', 'Seasons', 'Holiday', 'Funct_Day','Year', 'Month', 'Day', 'DWeek')
 head(bike_data)
 ```
@@ -49,3 +50,10 @@ head(bike_data)
 # plot
 ```
 
+```{r}
+## split data into a train and test set
+index <- 1:nrow(bike_data)
+testindex <- sample(index, trunc(length(index)*0.2))
+testset <- bike_data[testindex,-1]
+trainset <- bike_data[-testindex,-1]
+```
