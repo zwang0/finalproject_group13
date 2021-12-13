@@ -48,7 +48,21 @@ colnames(bike_data) <- c('Date','Rented_Bike_Count', 'Hour', 'Temperature',
                          'Holiday', 'Funct_Day','Year', 'Month', 'Day', 'DWeek')
 head(bike_data)
 ```
-
+```{r}
+# plot Bike Count vs Hour, group by weekdays, month, season, year
+ggplot(data=bike_data, aes(x = Hour, y = Rented.Bike.Count, colour = Seasons)) +
+   stat_summary(geom = "line", fun.y = mean)+
+   stat_summary(geom = "point", fun.y = mean)
+ggplot(data=bike_data, aes(x = Hour, y = Rented.Bike.Count, colour = DWeek)) +
+   stat_summary(geom = "line", fun.y = mean)+
+   stat_summary(geom = "point", fun.y = mean)
+ggplot(data=bike_data, aes(x = Hour, y = Rented.Bike.Count, colour = Month)) +
+   stat_summary(geom = "line", fun.y = mean)+
+   stat_summary(geom = "point", fun.y = mean)
+ggplot(data=bike_data, aes(x = Hour, y = Rented.Bike.Count, colour = Year)) +
+   stat_summary(geom = "line", fun.y = mean)+
+   stat_summary(geom = "point", fun.y = mean)
+```
 ```{r}
 ## split data into a train and test set
 index <- 1:nrow(bike_data)
