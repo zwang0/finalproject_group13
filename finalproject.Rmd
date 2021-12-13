@@ -1,6 +1,6 @@
 ---
 title: "Biostat625_finalproject"
-author: "Zehua Wang"
+author: "Zehua Wang, Ziman Jiang, Faye Fang, Yue Pan"
 date: "12/7/2021"
 output: html_document
 ---
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(tidyverse)
-bike_data = read.csv('SeoulBikeData.csv')
+bike_data = read.csv('/Data/SeoulBikeData.csv')
 head(bike_data)
 # Date : year-month-day
 # Rented Bike count - Count of bikes rented at each hour
@@ -41,10 +41,32 @@ bike_data$Year = factor(format(bike_data$Date, "%Y"))
 bike_data$Month = factor(months(bike_data$Date))
 bike_data$Day = factor(format(bike_data$Date, "%d"))
 bike_data$DWeek = factor(weekdays(bike_data$Date))
+#rename
+colnames(bike_data) <- c('Date','Rented_Bike_Count', 'Hour', 'Temperature',
+                         'Humidity', 'Wind_speed', 'Visibility', 'Dew_point_temp',
+                         'Solar_Rad', 'Rainfall', 'Snowfall', 'Seasons', 
+                         'Holiday', 'Funct_Day','Year', 'Month', 'Day', 'DWeek')
 head(bike_data)
 ```
-
 ```{r}
-# plot
+# plot Bike Count vs Hour, group by weekdays, month, season, year
+ggplot(data=bike_data, aes(x = Hour, y = Rented.Bike.Count, colour = Seasons)) +
+   stat_summary(geom = "line", fun.y = mean)+
+   stat_summary(geom = "point", fun.y = mean)
+ggplot(data=bike_data, aes(x = Hour, y = Rented.Bike.Count, colour = DWeek)) +
+   stat_summary(geom = "line", fun.y = mean)+
+   stat_summary(geom = "point", fun.y = mean)
+ggplot(data=bike_data, aes(x = Hour, y = Rented.Bike.Count, colour = Month)) +
+   stat_summary(geom = "line", fun.y = mean)+
+   stat_summary(geom = "point", fun.y = mean)
+ggplot(data=bike_data, aes(x = Hour, y = Rented.Bike.Count, colour = Year)) +
+   stat_summary(geom = "line", fun.y = mean)+
+   stat_summary(geom = "point", fun.y = mean)
 ```
-
+```{r}
+## split data into a train and test set
+index <- 1:nrow(bike_data)
+testindex <- sample(index, trunc(length(index)*0.2))
+testset <- bike_data[testindex,-1]
+trainset <- bike_data[-testindex,-1]
+```
