@@ -38,6 +38,10 @@ bike_data$Month = factor(months(bike_data$Date), levels = month.name)
 bike_data$Day = factor(as.integer(format(bike_data$Date, "%d")), levels = 1:31)
 bike_data$DWeek = factor(weekdays(bike_data$Date), levels = c("Monday", "Tuesday", 
                       "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+bike_data$Seasons=as.factor(bike_data$Seasons)
+bike_data$Functioning.Day=as.factor(bike_data$Functioning.Day)
+bike_data$Holiday=as.factor(bike_data$Holiday)
+
 #rename
 colnames(bike_data) <- c('Date','Rented_Bike_Count', 'Hour', 'Temperature',
                          'Humidity', 'Wind_speed', 'Visibility', 'Dew_point_temp',
