@@ -30,8 +30,8 @@ for(i in 1:n){
 sqrt(mean(rss_here))
 #for testset
 tree.pred <- predict(tree.hitters, testset[,-1])
-tree.MSE <- crossprod(tree.hitters - testset[,1]) / length(testindex)
-sqrttree.MSE)
+tree.MSE <- crossprod(tree.pred - testset[,1]) / length(testindex)
+sqrt(tree.MSE)
 
 #bagged Forest
 
