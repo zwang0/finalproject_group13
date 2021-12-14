@@ -39,7 +39,7 @@ set.seed(200)
 bag.bike<-randomForest(Rented.Bike.Count~.,
                        mtry=12,
                         importance=TRUE,
-                        ntree=1000,
+                        ntree=500,
                         data=trainset,
                         compete=FALSE)
 bag.bike
@@ -69,7 +69,7 @@ set.seed(200)
 rf.bike<-randomForest(Rented.Bike.Count~.,
                        mtry=sqrt(12),
                        importance=TRUE,
-                       ntree=1000,
+                       ntree=500,
                        data=trainset,
                        compete=FALSE)
 rf.bike
