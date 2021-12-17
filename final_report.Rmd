@@ -51,8 +51,9 @@ along with RSS, unnecessary estimated coefficients could be shrunk.
 ### Ridge
 Lasso regression is a type of linear regression similar to Ridge 
 but performs both shrinkage and selection.
-### Random Forest
 
+
+### Random Forest
 Random forest generates a large number of bootstrapped decision trees, which performs binary splits on data at decision nodes, which are defined with a predictors' levels. At each node, features are selected from a random sub sample of all features in the dataset. The feature that could split the dataset in a way that minimizes RSS for the model is selected. This procedure increases the speed of model building as well as  the variety in the use of features. 
   
 Out of Bag(OOB) score is used to validate random forest models. OOB samples are left-outs of each bootstrapping samples, used as a testset. OOB score is computed as the number of correctly predictions, while OOB error rate is the number of wrong classifications of OOBs.
@@ -60,7 +61,6 @@ Out of Bag(OOB) score is used to validate random forest models. OOB samples are 
 Variables in the model is assessed by variable importance, which is penalized for large OOB error rate. 
 
 ### Bagging Forest
-
 Bagging forest is similar to Random Forest, generating bootstrapped decision trees and using features that minimizes model RSS as the node to perform binary split. A fundamental difference between bagging forest and random forest is that at each node, all features in the dataset are compared against each other. 
 
 Therefore bagging forest is slower in model building speed and more restricted in the use of features in splitting. On the other hand, it could bring higher predictive accuracy, having better performance in minimizing MSE.
