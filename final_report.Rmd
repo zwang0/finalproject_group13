@@ -107,6 +107,10 @@ to avoid model overfitting and improve the robustness and generality.
 
 
 ## Result
+The performance assessment index used here is Root Mean Squared Error (RMSE), which is the standard sample deviation between the observed and the predicted values of the  residuals. RMSE measures the fluctuation of variance regarding different models. The better model is the model with lower RMSE. RMSE is defined by the equation as below.
+\begin{align}
+RMSE=\sqrt{\frac{\sum^n_{i=1}(Y_i-\hat{Y_i})^2}{n}}
+\end{align}
 
  Method | Training | Testing
    -    |    -     |   -
