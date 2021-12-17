@@ -156,7 +156,15 @@ data. What we have done is to extract day, month, year from date, and convert da
 to the day of week. The final rental bike data is partitioned into two namely, training 
 set for building the regression and testing set for assessing the model performance. 
 In a random way, 20% of the 8760 records were selected as the test set and the other 
-80% as the data of the training set. 
+80% as the data of the training set. The dimensions of training and testing set is 
+shown in Table 1.
+
+Table 1. Training and testing dataset
+
+|Dataset      | Number of observations |
+| :---        |    :-------------:     | 
+|Training set | 7008 and 17 variables  |
+|Testing set  | 1752 and 17 variables  |
 
 Figure 1 shows the total number of rented bikes for the entire period. It illustrates 
 that the rental bike count is highly variable at each hour. As can be seen, there 
