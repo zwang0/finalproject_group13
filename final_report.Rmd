@@ -171,7 +171,7 @@ that the rental bike count is highly variable at each hour. As can be seen, ther
 is a long tail in the data distribution.
 
 ```{r, include=FALSE}
-bike_data <- read.csv("SeoulBikeData.csv")
+bike_data <- read.csv("data/SeoulBikeData.csv")
 
 bike_data$Date = as.Date(bike_data$Date, "%d/%m/%Y")
 bike_data$Year = factor(format(bike_data$Date, "%Y"))
