@@ -1,14 +1,13 @@
+#load package
 library(rpart)
 library(rattle)
 library(rpart.plot)
 library(randomForest)
 
 
-
+#import data
 bike_data = read.csv('SeoulBikeData.csv')
 head(bike_data)
-
-
 
 bike_data$Date = as.Date(bike_data$Date, "%d/%m/%Y")
 bike_data$Year = factor(format(bike_data$Date, "%Y"))

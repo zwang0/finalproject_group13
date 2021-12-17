@@ -51,11 +51,11 @@ Ridge and LASSO regression estimates coefficients of multiple linear regression
 with the aim for lower variance. By minimizing the shrinkage penalty(
 $\lambda\Sigma_{j=1}^k |\hat{\beta_j^2}|$ for Ridge and 
 $\lambda \Sigma_{j=1}^k|\hat{\beta_j}|$ for LASSO) along with RSS, unnecessary
-estimated coefficients will be shrunk. The coefficient $\lambda$ controls the magnitude
-of the penalty. As it increases, coefficients of  Ridge tend towards 0 and
-coefficients of LASSO shrunk to absolute zero, leading to low variance and low
-bias. The major difference between two methods is that LASSO performs selection
-by removing variables when coefficients shark to zero.
+estimated coefficients will be shrunk. The coefficient $\lambda$ controls the
+magnitude of the penalty. As it increases, coefficients of  Ridge tend towards 0
+and coefficients of LASSO shrunk to absolute zero, leading to low variance and
+low bias. The major difference between two methods is that LASSO performs
+selection by removing variables when coefficients shark to zero.
 
 ### Random Forest and Bagging Forest 
 Random forest and Bagging forest generate a large number of bootstrapped
@@ -193,8 +193,7 @@ p2=ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   scale_color_stata() +
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None",,axis.text.x = element_text(angle=-25),axis.text.y = element_text(angle=-65))+
   theme(axis.text=element_text(size=6),
-        axis.title=element_text(size=6,face="bold"))
-
+        axis.title=element_text(size=6,face="bold"),plot.title = element_text(size = 10, face = "bold"))
 # Plot Average count vs hour by seasons
 p3=ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
    stat_summary(geom = "line", fun = mean)+
@@ -214,11 +213,8 @@ p4=ggcorrplot(M,  type = "lower",
      outline.col = "white",lab = TRUE,lab_size= 1,tl.cex = 5,show.legend=FALSE)+
   labs(title = "Figure 4.Correlation Matrix ")+
   theme(axis.text=element_text(size=8),
-        axis.title=element_text(size=4,face="bold"))
-
-
+        axis.title=element_text(size=4,face="bold"),plot.title = element_text(size = 10, face = "bold"))
 ggarrange(p1,p2,p3,p4,nrow=2, ncol=2) 
-
 
 ```
 
@@ -282,7 +278,7 @@ without dropping the input.
 
 ## Result
 We did 10-fold cross-validation in model training, and used the average of 10
-outcomes to be the RMSE of each training model. The table below shows the RMSE
+outcomes to be the RMSE of each training model. Table 2. shows the RMSE
 value of the trained regression models both in testing and training sets. As we
 can see, the NN model has the lowest RMSE in both the train set and test set.
 The bagging Forest model (BagF) also has an excellent performance among the
@@ -290,6 +286,7 @@ models of basic machine learning methods. The models of LM, LASSO and Ridge
 produce the worst results compared to other models. The multicollinearity of
 covariates may be the main cause the unsatisfying results.
 
+Table 2. RMSE values of training set and testing set
  Method | Training | Testing
    :-  |   :-:    |   :-:
  LM     | 407.0000 | 417.0000
