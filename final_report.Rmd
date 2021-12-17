@@ -286,7 +286,7 @@ models are not as good as the one without dropping input.
 ## Result
 
  Method | Training | Testing
-   -    |    -     |   -
+   :-:  |   :-:    |   :-:
  LM     | 407.0000 | 417.0000
  Ridge  | 427.1653 | 437.7671
  LASSO  | 427.3688 | 437.4730
