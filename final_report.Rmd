@@ -111,4 +111,6 @@ to avoid model overfitting and improve the robustness and generality.
 
 ## Citation
 
-E, S., Park, J., &amp; Cho, Y. (2020). Using data mining techniques for bike sharing demand prediction in Metropolitan City. Computer Communications, 153, 353–366. https://doi.org/10.1016/j.comcom.2020.02.007 
+E, S., Park, J., &amp; Cho, Y. (2020). Using data mining techniques for bike
+sharing demand prediction in Metropolitan City. Computer Communications, 153,
+353–366. https://doi.org/10.1016/j.comcom.2020.02.007
