@@ -323,9 +323,9 @@ getting close when changing the seed as *48107*.
 
 ## Citation
 
-E, S., Park, J., &amp; Cho, Y. (2020). Using data mining techniques for bike
+[1] E, S., Park, J., &amp; Cho, Y. (2020). Using data mining techniques for bike
 sharing demand prediction in Metropolitan City. Computer Communications, 153,
 353–366. https://doi.org/10.1016/j.comcom.2020.02.007
 
-Izenman, A. J. (2008). Modern multivariate statistical techniques. Regression,
+[2] Izenman, A. J. (2008). Modern multivariate statistical techniques. Regression,
 classification and manifold learning, 10, 978-0.
