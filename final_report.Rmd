@@ -108,6 +108,16 @@ to avoid model overfitting and improve the robustness and generality.
 
 ## Result
 
+ Method | Training | Testing
+   -    |    -     |   -
+ LM     | 407.0000 | 417.0000
+ Ridge  | 427.1653 | 437.7671
+ LASSO  | 427.3688 | 437.4730
+ RF     | 224.6018 | 222.9583
+ BagF   | 184.1149 | 182.7463
+ SVM    | 226.5303 | 221.5075
+ NN     | 120.0056 | 133.2593
+
 ## Discussion
 
 ## Citation
