@@ -47,11 +47,16 @@ out_gs1[order(out_gs1[,3]),]
 C_list <- c(20,30)
 G_list <- c(seq(0.09,0.12,by=0.01))
 out_gs2 <- grid_search(C_list, G_list)
-out_gs2[order(out_gs2[,3]),]
+out_gs2 <- out_gs2[order(out_gs2[,3]),] #ordered by MSE from low to high
+
+## RMSE for training
+svm.train.MSE <- out_gs2[1,3]
+svm.train.RMSE <- sqrt(svm.train.MSE)
 
 # testing
 ## svm with cost=20, gamma=0.11
 svm.model <- svm(Rented_Bike_Count ~ ., data = trainset, cost = 20, gamma = 0.11)
 svm.pred <- predict(svm.model, testset[,-1])
+## RMSE for testing
 svm.MSE <- crossprod(svm.pred - testset[,1]) / length(testindex)
 svm.RMSE <- sqrt(svm.MSE)
