@@ -41,7 +41,7 @@ library(e1071)
 C_list <- c(1,seq(10, 100, by =10))
 G_list <- c(seq(0.01,0.1,by=0.01))
 out_gs1 <- grid_search(C_list, G_list)
-out_gs1[order(out_gs1[,3]),]
+out_gs1 <- out_gs1[order(out_gs1[,3]),] #ordered by MSE from low to high
 
 ### grid search 2
 C_list <- c(20,30)
