@@ -204,8 +204,7 @@ p2=ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   scale_color_stata() +
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None",,axis.text.x = element_text(angle=-25),axis.text.y = element_text(angle=-65))+
   theme(axis.text=element_text(size=6),
-        axis.title=element_text(size=6,face="bold"))
-
+        axis.title=element_text(size=6,face="bold"),plot.title = element_text(size = 10, face = "bold"))
 # Plot Average count vs hour by seasons
 p3=ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
    stat_summary(geom = "line", fun = mean)+
@@ -225,11 +224,8 @@ p4=ggcorrplot(M,  type = "lower",
      outline.col = "white",lab = TRUE,lab_size= 1,tl.cex = 5,show.legend=FALSE)+
   labs(title = "Figure 4.Correlation Matrix ")+
   theme(axis.text=element_text(size=8),
-        axis.title=element_text(size=4,face="bold"))
-
-
+        axis.title=element_text(size=4,face="bold"),plot.title = element_text(size = 10, face = "bold"))
 ggarrange(p1,p2,p3,p4,nrow=2, ncol=2) 
-
 
 ```
 
