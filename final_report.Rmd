@@ -41,12 +41,45 @@ model.
 ### Random Forest
 ### Support Vector Machine
 ### Neural Network
+Neural networks (ANNs), also known as artificial neural networks (ANNs), are 
+computing systems inspired by the way biological neural networks in the human 
+brain process information. Building Neural networks is a widely adopted method 
+in machine learning. The tasks to which neural networks are applied tend to fall 
+within the following broad categories including regression analysis, classification,
+and data processing. Neural networks provide the current best solutions in solving
+many computer science problems such as image recognition, speech recognition, 
+and natural language processing.
+
+In this project, we are going to solve a regression problem and make a prediction
+using neural networks. Instead of applying Convolutional neural network or Recurrent 
+neural network, we adopt the most basic one: *Feedforward Neural Network* (FFNN). 
+Feedforward neural network was the first type of artificial neural network devised. 
+Different from recurrent neural networks, the connections between nodes do not 
+form a circle. It has only one direction from input layer formed by input nodes, 
+through hidden layers and to out the output layer formed by output nodes. 
+Specifically, we will adopt *Multilayer Perceptron* (MLP). A multilayer perceptron 
+consists of at least three layers of nodes: an input layer, a hidden layer and 
+an output layer. There are 8 hidden layers in our model.
+
+The toolkit we used for building the neural network is *Keras*. Keras is a deep 
+learning API (application programming interface) written in Python, running on 
+top of the machine learning platform *TensorFlow*. The activation function we
+adopted are ReLU and Linear. Rectified Linear Unit (ReLU) is an activation function
+that defines the positive part of its arguement. It can be expressed as:
+$$f(x) = x^{+} = \max(0, x)$$
+Linear is an activation function that simply returns the the argument itself. We
+also add regularizers that apply to a L1 and L2 penalty on the layer's output.
+L1 penalty is the penalty term in L1 regression or Lasso regression. L2 penalty
+is the penalty term in L2 regression or Ridge regression. Regularizers are used 
+to avoid model overfitting and improve the robustness and generality. 
 
 ## Dataset description
 
 ## Evaluation indices
 
 ## Model development
+
+
 
 ## Result
 
