@@ -128,7 +128,7 @@ The toolkit we used for building the neural network is *Keras*. Keras is a deep
 learning API (application programming interface) written in Python, running on
 top of the machine learning platform *TensorFlow*. The activation function we
 adopted are ReLU and Linear. Rectified Linear Unit (ReLU) is an activation
-<<<<<<< HEAD
+
 function that defines the positive part of its arguement. It can be expressed as
 $f(x) = x^{+} = \max(0, x)$. Linear is an activation function that simply
 returns the the argument itself. We also add regularizers that apply to a L1 and
@@ -137,6 +137,7 @@ regression or Lasso regression. L2 penalty is the penalty term in L2 regression
 or Ridge regression. Regularizers are used to avoid model overfitting and
 improve the robustness and generality. By setting the batch size to 64, we run
 110 iterations per epoch with over 800 epochs for the optimal model.
+![History of Train and Validation MSE](graphs/nn_mod_mse.png)
 
 ## Dataset
 function that defines the positive part of its argument. It can be expressed as:
@@ -285,14 +286,18 @@ hidden layers, and the nodes number keep reducing until the size of output
 (which is 1 since we only need to make a prediction of the number of rented
 bike).
 
-However, large number of parameters may also bring the problem: overfit. To
-solve this problem, we constraint the complexity of the model. No more than 8
-hidden layers and no more than 512 number of nodes in each layers. Typically, we
-adopt 256 or 64 nodes per layer. Futhermore, we introduce regularizers that add
-L1 or L2 penalty to the model during training base on the magnitude of the
-activation. We also try to randomly dropout a portion (i.e. 20%) of the input in
-specific layer while training. But later we find that the performance of these 
-models are not as good as the one without dropping input.
+However, large number of parameters may also bring the problem: overfit. In the
+figure below, we can tell that the train and test RMSE have clear trends of
+decreasing, except for the unusual high test RMSE in model 5. This could be
+attributed to overfit. To solve this problem, we constraint the complexity of
+the model. No more than 8 hidden layers and no more than 512 number of nodes in
+each layers. Typically, we adopt 256 or 64 nodes per layer. Furthermore, we
+introduce regularizers that add L1 or L2 penalty to the model during training
+base on the magnitude of the activation. We also try to randomly dropout a
+portion (i.e. 20%) of the input in specific layer while training. But later we
+find that the performance of these models are not as good as the one without
+dropping input.
+![RMSE Comparison between Models](graphs/nn_models_RMSE_Compare.png)
 
 
 ## Result
@@ -338,4 +343,6 @@ selection is not needed for this dataset.
 E, S., Park, J., &amp; Cho, Y. (2020). Using data mining techniques for bike
 sharing demand prediction in Metropolitan City. Computer Communications, 153,
 353–366. https://doi.org/10.1016/j.comcom.2020.02.007
-Izenman, A. J. (2008). Modern multivariate statistical techniques. Regression, classification and manifold learning, 10, 978-0.
+
+Izenman, A. J. (2008). Modern multivariate statistical techniques. Regression,
+classification and manifold learning, 10, 978-0.
