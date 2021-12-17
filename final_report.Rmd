@@ -161,8 +161,9 @@ In a random way, 20% of the 8760 records were selected as the test set and the o
 Fig 1. shows the total number of rented bikes for the entire period. It illustrates 
 that the rental bike count is highly variable at each hour. As can be seen, there 
 is a long tail in the data distribution.
+
 ```{r, include=FALSE}
-bike_data <- read.csv("C:/Users/fangn/Downloads/SeoulBikeData.csv")
+bike_data <- read.csv("SeoulBikeData.csv")
 
 bike_data$Date = as.Date(bike_data$Date, "%d/%m/%Y")
 bike_data$Year = factor(format(bike_data$Date, "%Y"))
@@ -309,6 +310,11 @@ correlation between them is moderate and VIFs aren't exaggerate. Thus, other
 circumstances that could make variable selection useful don't hold here. 
 This explains why Lasso and Ridge regression didn’t perform well in our project.
 
+Both bagging forest and random forest shows that Hour and Functioning.Day is 
+significantly more important than other variables in predicting rental count.
+Bagging forest results in smaller RMSE than random forest, suggesting that since
+number of variables is not excessive, increasing variety during feature selection
+is not needed for this dataset.
 
 ## Citation
 
