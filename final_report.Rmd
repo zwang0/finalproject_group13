@@ -284,9 +284,10 @@ models are not as good as the one without dropping input.
 
 
 ## Result
+We did 10-fold cross-validation in model training, and used the average of 10 outcomes to be the RMSE of each training model. The table below shows the RMSE value of the trained regression models both in testing and training sets. As we can see, the NN model has the lowest RMSE in both the train set and test set. The bagging Forest model (BagF) also has an excellent performance among the models of basic machine learning methods. The models of LM, LASSO and Ridge produce the worst results compared to other models. The multicollinearity of covariates may be the main cause the unsatisfying results. 
 
  Method | Training | Testing
-   :-:  |   :-:    |   :-:
+   :-  |   :-:    |   :-:
  LM     | 407.0000 | 417.0000
  Ridge  | 427.1653 | 437.7671
  LASSO  | 427.3688 | 437.4730
