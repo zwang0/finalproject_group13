@@ -133,7 +133,9 @@ top of the machine learning platform *TensorFlow*. The activation function we
 adopted are ReLU and Linear. Rectified Linear Unit (ReLU) is an activation
 function that defines the positive part of its arguement. It can be expressed
 as:
-$$f(x) = x^{+} = \max(0, x)$$
+\begin{align}
+f(x) = x^{+} = \max(0, x)
+\end{align}
 Linear is an activation function that simply returns the the argument itself. We
 also add regularizers that apply to a L1 and L2 penalty on the layer's output.
 L1 penalty is the penalty term in L1 regression or Lasso regression. L2 penalty
