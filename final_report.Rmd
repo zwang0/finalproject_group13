@@ -51,7 +51,7 @@ Ridge and LASSO regression estimates coefficients of multiple linear regression
 with the aim for lower variance. By minimizing the shrinkage penalty(
 $\lambda\Sigma_{j=1}^k |\hat{\beta_j^2}|$ for Ridge and 
 $\lambda \Sigma_{j=1}^k|\hat{\beta_j}|$ for LASSO) along with RSS, unnecessary
-estimated coefficients will be shrunk. The coefficient λ controls the magnitude
+estimated coefficients will be shrunk. The coefficient $\lambda$ controls the magnitude
 of the penalty. As it increases, coefficients of  Ridge tend towards 0 and
 coefficients of LASSO shrunk to absolute zero, leading to low variance and low
 bias. The major difference between two methods is that LASSO performs selection
