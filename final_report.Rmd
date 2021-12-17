@@ -46,18 +46,16 @@ Y=\beta_0 + X^T\beta
 In the regression, the coefficients $\beta_0$ and $\beta$ could be estimated by 
 solving the equation.
 
-### Ridge
-Ridge regression estimates coefficients of multiple linear regression with the 
-aim for lower variance. By minimizing the shrinkage penalty, 
-$\lambda \Sigma_{j=1}^k |\hat{\beta_j^2}|$, along with RSS, unnecessary
-estimated coefficients could be shrunk.The coefficient $\lambda$ controls the magnitude of the penalty. As it increase, 
-coefficients tend towards 0, leading to low variance and low bias.
-
-### LASSO
-Lasso regression is a type of linear regression similar to Ridge, minimizing 
-shrinkage penalty $\lambda \Sigma_{j=1}^k |\hat{\beta_j}|$,  but performs 
-selection in addition to shrinkage.As the coefficient $\lambda$ increase, coefficients of LASSO model could be 
-shurnk to absolute zero, resulting in removing variables.
+### Ridge and LASSO
+Ridge and LASSO regression estimates coefficients of multiple linear regression
+with the aim for lower variance. By minimizing the shrinkage penalty($\lambda
+\Sigma_{j=1}^k |\hat{\beta_j^2}|$ for Ridge and $\lambda \Sigma_{j=1}^k
+|\hat{\beta_j}|$ for LASSO) along with RSS, unnecessary estimated coefficients
+will be shrunk. The coefficient λ controls the magnitude of the penalty. As it
+increases, coefficients of  Ridge tend towards 0 and coefficients of LASSO
+shrunk to absolute zero, leading to low variance and low bias. The major
+difference between two methods is that LASSO performs selection by removing
+variables when coefficients shark to zero.
 
 ### Random Forest and Bagging Forest 
 Random forest and Bagging forest generate a large number of bootstrapped
