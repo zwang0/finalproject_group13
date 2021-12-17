@@ -270,11 +270,9 @@ without dropping the input.
 
 \begin{figure}
   \centering
-  \includegraphics[height=4cm,width=6cm]{graphs/nn_mod_mse.png}
-  \includegraphics[height=4cm,width=6cm]{graphs/nn_models_RMSE_Compare.png}
+  \includegraphics[height=5cm,width=7.5cm]{graphs/nn_mod_mse.png}
+  \includegraphics[height=5cm,width=7.5cm]{graphs/nn_models_RMSE_Compare.png}
 \end{figure}
-<!-- ![History of Train and Validation MSE](graphs/nn_mod_mse.png)  -->
-<!-- ![RMSE Comparison between Models](graphs/nn_models_RMSE_Compare.png) -->
 
 ## Result
 We did 10-fold cross-validation in model training, and used the average of 10
@@ -287,6 +285,7 @@ produce the worst results compared to other models. The multicollinearity of
 covariates may be the main cause the unsatisfying results.
 
 Table 2. RMSE values of training set and testing set
+ 
  Method | Training | Testing
    :-  |   :-:    |   :-:
  LM     | 407.0000 | 417.0000
@@ -317,9 +316,9 @@ the number of variables is not excessive, increasing variety during feature
 selection is not needed for this dataset.
 
 Random seed setting may lead to different results in neural networks. When
-setting the seed as *625*, the difference between validation mse and test mse is
+setting the seed as 625, the difference between validation mse and test mse is
 large, indicating that the data split is not even. Validation and test mse are
-getting close when changing the seed as *48107*.
+getting close when changing the seed as 48107.
 
 ## Citation
 
@@ -327,5 +326,5 @@ getting close when changing the seed as *48107*.
 sharing demand prediction in Metropolitan City. Computer Communications, 153,
 353–366. https://doi.org/10.1016/j.comcom.2020.02.007
 
-[2] Izenman, A. J. (2008). Modern multivariate statistical techniques. Regression,
-classification and manifold learning, 10, 978-0.
+[2] Izenman, A. J. (2008). Modern multivariate statistical techniques.
+Regression, classification and manifold learning, 10, 978-0.
