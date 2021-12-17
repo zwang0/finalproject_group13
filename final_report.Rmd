@@ -45,7 +45,12 @@ In the regression, after we input the data of X and Y, the coefficients
 $\beta_0$ and $\beta$ could be estimated by solving the equation.
 
 ### LASSO
+Ridge regression estimates coefficients of multiple linear regression 
+with the aim for lower variance. By minimizing the shrinkage penalty 
+along with RSS, unnecessary estimated coefficients could be shrunk.
 ### Ridge
+Lasso regression is a type of linear regression similar to Ridge 
+but performs both shrinkage and selection.
 ### Bagged Forest
 ### Random Forest
 ### Support Vector Machine
