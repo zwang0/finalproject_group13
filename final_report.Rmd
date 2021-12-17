@@ -138,8 +138,33 @@ In a random way, 20% of the 8760 records were selected as the test set and the o
 Fig 1. shows the total number of rented bikes for the entire period. It illustrates 
 that the rental bike count is highly variable at each hour. As can be seen, there 
 is a long tail in the data distribution.
+```{r, include=FALSE}
+bike_data <- read.csv("C:/Users/fangn/Downloads/SeoulBikeData.csv")
+
+bike_data$Date = as.Date(bike_data$Date, "%d/%m/%Y")
+bike_data$Year = factor(format(bike_data$Date, "%Y"))
+bike_data$Month = factor(months(bike_data$Date))
+bike_data$Day = factor(format(bike_data$Date, "%d"))
+bike_data$DWeek = factor(weekdays(bike_data$Date))
+bike_data$Seasons=as.factor(bike_data$Seasons)
+bike_data$Functioning.Day=as.factor(bike_data$Functioning.Day)
+bike_data$Holiday=as.factor(bike_data$Holiday)
+colnames(bike_data) <- c('Date','Rented_Bike_Count', 'Hour', 'Temperature', 'Humidity', 'Wind_speed', 'Visibility', 'Dew_point_temp', 'Solar_Rad', 'Rainfall', 'Snowfall', 'Seasons', 'Holiday', 'Funct_Day','Year', 'Month', 'Day', 'DWeek')
+
+
+library(ggplot2)
+library(hrbrthemes)
+library(ggthemes) 
+library("PerformanceAnalytics")
+library("psych")
+library(corrplot)
+library(RColorBrewer)
+require(gridExtra)
+
+```
+
 ```{r}
-  ggplot(bike_data, aes(x=Rented_Bike_Count)) +
+ggplot(bike_data, aes(x=Rented_Bike_Count)) +
     geom_histogram(binwidth=110,
                    fill="lightblue", 
                    col="orange",
@@ -148,15 +173,7 @@ is a long tail in the data distribution.
   theme_stata() +
   scale_color_stata() +
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
-```
-Fig 2. displays an average number of the day throughout the week. It is shown that the 
-count distribution follows identical trends over the weekdays and different patterns 
-over the weekends. Fig 3. shows that the average count is high at each hour in the 
-summer and low in the winter. The count is quite similar during autumn and spring. 
-The count abruptly increases in hours 8 and 18. This is because the hours from 8 AM 
-and 6 PM is regarded as the peak hours, during which the usage of the rental bike is 
-high in Seoul.
-```{r}
+  
 # Plot Average count by week 
 ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   geom_bar(stat = "identity") +
@@ -167,6 +184,7 @@ ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   theme_stata() +
   scale_color_stata() +
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
+
 # Plot Average count by month
 ggplot(bike_data, aes(x=Month, y=Rented_Bike_Count ,fill= Month))+
   geom_bar(stat = "identity") +
@@ -177,20 +195,9 @@ ggplot(bike_data, aes(x=Month, y=Rented_Bike_Count ,fill= Month))+
   theme_stata() +
   scale_color_stata() +
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None",axis.text.x = element_text(angle=-25))
-```
 
-As shown in Fig.(), the corplot function creates a graph of a correlation matrix, 
-coloring the regions according to the value correlation coefficients. A correlation 
-value of 1 is considered as a total positive correlation, −1 is considered total 
-negative correlation, and if 0 no correlation exists between the variable. Positive 
-correlations are notable between count and hour, temp, wind, visb, dew and solar. 
-There is a negative correlation between count and humidity, rain and snow respectively. 
-These correlation values imply that the weather variables are related to the rental 
-bike count at each hour. 
-```{r }
+
 #plot correlation
-library(corrplot)
-library(RColorBrewer)
 my_data <- bike_data[, 2:11]
 colnames(my_data)[c(1,3:10)] <- c('Count', 'Temp', 'Humiditity', 'Wind', 'Visb', 'Dew', 'Solar','Rain','Snow')
 M <-cor(my_data)
@@ -200,6 +207,23 @@ corrplot(M, method = "color", type = "upper",
          title="Fig Correlation Plot" ,
           mar=c(0,0,1,0))
 ```
+Fig 2. displays an average number of the day throughout the week. It is shown that the 
+count distribution follows identical trends over the weekdays and different patterns 
+over the weekends. Fig 3. shows that the average count is high at each hour in the 
+summer and low in the winter. The count is quite similar during autumn and spring. 
+The count abruptly increases in hours 8 and 18. This is because the hours from 8 AM 
+and 6 PM is regarded as the peak hours, during which the usage of the rental bike is 
+high in Seoul.
+
+As shown in Fig.(), the corplot function creates a graph of a correlation matrix, 
+coloring the regions according to the value correlation coefficients. A correlation 
+value of 1 is considered as a total positive correlation, $-1$ is considered total 
+negative correlation, and if 0 no correlation exists between the variable. Positive 
+correlations are notable between count and hour, temp, wind, visb, dew and solar. 
+There is a negative correlation between count and humidity, rain and snow respectively. 
+These correlation values imply that the weather variables are related to the rental 
+bike count at each hour. 
+
 
 ## Evaluation index
 The performance assessment index used here is Root Mean Squared Error (RMSE), which is the standard sample deviation between the observed and the predicted values of the  residuals. RMSE measures the fluctuation of variance regarding different models. The better model is the model with lower RMSE. RMSE is defined by the equation as below.
