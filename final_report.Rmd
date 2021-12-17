@@ -46,18 +46,16 @@ Y=\beta_0 + X^T\beta
 In the regression, the coefficients $\beta_0$ and $\beta$ could be estimated by 
 solving the equation.
 
-### Ridge
-Ridge regression estimates coefficients of multiple linear regression with the 
-aim for lower variance. By minimizing the shrinkage penalty, 
-$\lambda \Sigma_{j=1}^k |\hat{\beta_j^2}|$, along with RSS, unnecessary
-estimated coefficients could be shrunk.The coefficient $\lambda$ controls the magnitude of the penalty. As it increase, 
-coefficients tend towards 0, leading to low variance and low bias.
-
-### LASSO
-Lasso regression is a type of linear regression similar to Ridge, minimizing 
-shrinkage penalty $\lambda \Sigma_{j=1}^k |\hat{\beta_j}|$,  but performs 
-selection in addition to shrinkage.As the coefficient $\lambda$ increase, coefficients of LASSO model could be 
-shurnk to absolute zero, resulting in removing variables.
+### Ridge and LASSO
+Ridge and LASSO regression estimates coefficients of multiple linear regression
+with the aim for lower variance. By minimizing the shrinkage penalty(
+$\lambda\Sigma_{j=1}^k |\hat{\beta_j^2}|$ for Ridge and 
+$\lambda \Sigma_{j=1}^k|\hat{\beta_j}|$ for LASSO) along with RSS, unnecessary
+estimated coefficients will be shrunk. The coefficient λ controls the magnitude
+of the penalty. As it increases, coefficients of  Ridge tend towards 0 and
+coefficients of LASSO shrunk to absolute zero, leading to low variance and low
+bias. The major difference between two methods is that LASSO performs selection
+by removing variables when coefficients shark to zero.
 
 ### Random Forest and Bagging Forest 
 Random forest and Bagging forest generate a large number of bootstrapped
@@ -69,14 +67,13 @@ Bag(OOB) score is used to validate random forest models. OOB samples are
 left-outs of each bootstrapping sample, used as a testset. OOB score is computed
 as the number of correct predictions, while OOB error rate is the number of
 wrong classifications of OOBs. Variables in the model are assessed by variable
-importance, which is penalized for large OOB error rate.
-A fundamental difference between bagging forest and random forest is that at
-each node, all features in the dataset are compared against each other.
-Therefore random forest increases the speed of model building as well as the
-variety in the use of features. Bagging forest is slower in model building speed
-and more restricted in the use of features in split ting. On the other hand, it
-could bring higher predictive accuracy, having better performance in minimizing
-MSE.
+importance, which is penalized for large OOB error rate. A fundamental
+difference between bagging forest and random forest is that at each node, all
+features in the dataset are compared against each other. Therefore random forest
+increases the speed of model building as well as the variety in the use of
+features. Bagging forest is slower in model building speed and more restricted
+in the use of features in split ting. On the other hand, it could bring higher
+predictive accuracy, having better performance in minimizing MSE.
 
 ### Support Vector Machine
 Support Vector Machine(SVM) was designed for classification, gand later the idea
@@ -84,7 +81,9 @@ was generalized to regression. SVM regression is used in this project. In SVM
 regression, we would like to form a "band" around the true regression function
 that contains most of the points. With this purpose, the loss function is
 defined as below. 
-\begin{align} \mu(x)=\beta_0 + x^T\beta \end{align} 
+\begin{align} 
+\mu(x)=\beta_0 + x^T\beta 
+\end{align} 
 If the point (X,Y) = (x,y) is such that $|y-\mu(x)|\leq \epsilon$, then the loss
 is taken to be zero; otherwise the loss is taken to be $|y-\mu(x)|- \epsilon$.
 The main goal is to find a $\mu(x)$ such that most points with the loss taken to
@@ -112,8 +111,8 @@ top of the machine learning platform *TensorFlow*.
 
 ### Data description
 
-The raw data is from the UCI machine learning repository which is a collection
-of 8,760 renting records from 2017 to 2018. There are 14 variables in the
+The raw data is from the UCI machine learning repository, which is a collection
+of 8,760 bike rental records from 2017 to 2018. There are 14 variables in the
 dataset. The table shows the features of each variable. The dataset contains
 weather information (Temperature, Humidity, Windspeed, Visibility, Dewpoint,
 Solar radiation, Snowfall, Rainfall), the number of bikes rented per hour and
@@ -121,24 +120,19 @@ date information.
 
 ### Exploratory data analysis
 
-The data set included in the UCI we used has been processed, so there is no
-missing data. What we have done is to extract day, month, year from date, and
-convert date to the day of week. The final rental bike data is partitioned into
-two namely, training set for building the regression and testing set for
-assessing the model performance. In a random way, 20% of the 8760 records were
-selected as the test set and the other 80% as the data of the training set. The
-dimensions of training and testing set is shown in Table 1.
+The data set included in the UCI has been processed, so there are no missing
+data. We extracted day, month, and year, and converted date to the day of week.
+The final rental bike data was partitioned into two: a training set for building
+the regression and a testing set for assessing the model performance. 20% of the
+8760 records were randomly selected as the test set and the other 80% as the
+training set. The dimensions of the training and test sets are shown in Table 1.
 
-Table 1. Training and testing dataset
+Table 1. Training and test dataset
 
 |Dataset      | Number of observations |
 | :---        |    :-------------:     | 
 |Training set | 7008 and 17 variables  |
-|Testing set  | 1752 and 17 variables  |
-
-Figure 1 shows the total number of rented bikes for the entire period. It
-illustrates that the rental bike count is highly variable at each hour. As can
-be seen, there is a long tail in the data distribution.
+|Test set     | 1752 and 17 variables  |
 
 ```{r, include=FALSE}
 bike_data <- read.csv("data/SeoulBikeData.csv")
@@ -165,22 +159,26 @@ library(ggcorrplot)
 library("ggpubr")
 ```
 
-Figure 2 displays an average number of the day throughout the week. It is shown
-that the count distribution follows identical trends over the weekdays and
-different patterns over the weekends. Figure 3 shows that the average count is
-high at each hour in the summer and low in the winter. The count is quite
-similar during autumn and spring. The count abruptly increases in hours 8 and
-18. This is because the hours from 8 AM and 6 PM is regarded as the peak hours,
-during which the usage of the rental bike is high in Seoul.
+Figure 1 shows the total number of rented bikes for the entire period. It
+illustrates that the rental bike count is highly variable at each hour. As can
+be seen, there is a long tail in the data distribution. Figure 2 displays an
+average number of bike rentals by week days. It is shown that the count
+distribution follows identical trends over the weekdays and different patterns
+over the weekends. Figure 3 shows that the average count is high at each hour in
+the summer and low in the winter. The count is quite similar during autumn and
+spring. The count abruptly increases in hours 8 and 18. This is because the
+hours from 8 AM and 6 PM are the peak hours, during which the usage of the
+rental bike is high in Seoul.
 
 As shown in Figure 4, the corplot function creates a graph of a correlation
 matrix, coloring the regions according to the value correlation coefficients. A
-correlation value of 1 is considered as a total positive correlation, $-1$ is
-considered total negative correlation, and if 0 no correlation exists between
-the variable. Positive correlations are notable between count and hour, temp,
-wind, visb, dew and solar. There is a negative correlation between count and
-humidity, rain and snow respectively. These correlation values imply that the
-weather variables are related to the rental bike count at each hour.
+correlation value of 1 is considered as a total positive correlation, −1 is
+considered the total negative correlation, and if 0 no correlation exists
+between the variables. Positive correlations are notable between count and hour,
+temp, wind, visb, dew and solar. There is a negative correlation between count
+and humidity, rain and snow. These correlation values imply that the weather
+variables are related to the rental bike count at each hour.
+
 
 ```{r}
 p1=ggplot(bike_data, aes(x=Rented_Bike_Count)) +
@@ -315,21 +313,22 @@ covariates may be the main cause the unsatisfying results.
  NN     | 120.0056 | 133.2593
 
 ## Discussion
-Ridge and Lasso are used when n is not much larger than p, there can be a lot of
-variability in the fit which can result in either overfitting and very poor
-predictive ability. Our trainset has 7008 observations of 17 variables, which
-implies we are in the case n>>p. Therefore, we don't have the problem that Ridge
-and Lasso intended to solve. Furthermore, variable selection (like in Ridge and
-Lasso) is useful when some predictors are not significant or predictors are
-highly correlated. In our dataset, most predictors are highly significant,
-correlation between them is moderate and VIFs aren't exaggerate. Thus, other
-circumstances that could make variable selection useful don't hold here. This
-explains why Lasso and Ridge regression didn’t perform well in our project.
+Ridge and Lasso are used when n is not much larger than p, as there can be a lot
+of variability in the fit, which can result in either overfitting and very poor
+predictive ability. Our training set has 7008 observations of 17 variables,
+which implies we are in the case n»p. Therefore, we don’t have the problem that
+Ridge and Lasso intended to solve. Furthermore, variable selection (like in
+Ridge and Lasso) is useful when some predictors are not significant or
+predictors are highly correlated. In our dataset, most predictors are highly
+significant, correlation between them is moderate, and VIFs aren’t exaggerated.
+Thus, other circumstances that could make variable selection useful don’t hold
+here. This explains why Lasso and Ridge regression didn’t perform well in our
+project.
 
-Both bagging forest and random forest shows that Hour and Functioning.Day is
+Both bagging forest and random forest show that Hour and Functioning_Day are
 significantly more important than other variables in predicting rental count.
 Bagging forest results in smaller RMSE than random forest, suggesting that since
-number of variables is not excessive, increasing variety during feature
+the number of variables is not excessive, increasing variety during feature
 selection is not needed for this dataset.
 
 ## Citation
