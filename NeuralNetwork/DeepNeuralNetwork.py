@@ -68,13 +68,18 @@ bike_data['Holiday'] = pd.factorize(bike_data['Holiday'])[0]
 
 bike_data.head()
 
-## split data into a train and test set
-bike_data = bike_data.sample(frac = 1, random_state = 625).\
-                reset_index(drop = True)
 data_size = bike_data.shape[0]
-trainset = bike_data.iloc[:round(data_size*0.7), 1:].reset_index(drop = True)
-valset = bike_data.iloc[round(data_size*0.7):round(data_size*0.8), 1:].reset_index(drop = True)
-testset = bike_data.iloc[round(data_size*0.8):, 1:].reset_index(drop = True)
+idx =  list(range(data_size))
+np.random.seed(48107)
+np.random.shuffle(idx)
+train_idx = idx[:int(data_size*0.8)]
+test_idx = idx[int(data_size*0.8):int(data_size*0.9)]
+val_idx = idx[int(data_size*0.9):]
+
+## split data into a train and test set
+trainset = bike_data.iloc[train_idx, 1:].reset_index(drop = True)
+valset = bike_data.iloc[val_idx, 1:].reset_index(drop = True)
+testset = bike_data.iloc[test_idx, 1:].reset_index(drop = True)
 
 # ## Neural Network
 
@@ -88,25 +93,109 @@ X_test = testset.iloc[:, 1:]
 y_test = testset.iloc[:, 0]
 X_val = valset.iloc[:, 1:]
 y_val = valset.iloc[:, 0]
-train = tf.data.Dataset.from_tensor_slices((X_train, y_train))
-train = train.shuffle(len(X_train)).batch(4)
-val = tf.data.Dataset.from_tensor_slices((X_val, y_val))
-val = train.shuffle(len(X_val)).batch(1)
-test = tf.data.Dataset.from_tensor_slices((X_test, y_test))
-test = test.batch(1)
 
 
+# +
 # model 1
-def create_mod1():
+def create_model1():  
     model = tf.keras.models.Sequential([
-        tf.keras.layers.Dense(512, activation='relu', input_shape=(X_train.shape[1], )),
+        tf.keras.layers.Dense(256, activation='relu', input_dim=X_train.shape[1]),
+        tf.keras.layers.Dense(256, activation='relu'),
+        tf.keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(1, activation='linear')
+    ])
+    model.compile(
+        optimizer = 'adam',
+        loss = 'mean_squared_error',
+    )
+    return model
+
+# model 2
+def create_model2():  
+    model = tf.keras.models.Sequential([
+        tf.keras.layers.Dense(256, activation='relu', input_dim=X_train.shape[1]),
+        tf.keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(1, activation='linear')
+    ])
+    model.compile(
+        optimizer = 'adam',
+        loss = 'mean_squared_error',
+    )
+    return model
+
+# model 3
+def create_model3():  
+    model = tf.keras.models.Sequential([
+        tf.keras.layers.Dense(512, activation='relu', input_dim=X_train.shape[1]),
+        tf.keras.layers.Dense(256, activation='relu'),
+        tf.keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(1, activation='linear')
+    ])
+    model.compile(
+        optimizer = 'adam',
+        loss = 'mean_squared_error',
+    )
+    return model
+
+# model 4
+def create_model4():  
+    model = tf.keras.models.Sequential([
+        tf.keras.layers.Dense(512, activation='relu', input_dim=X_train.shape[1]),
+        tf.keras.layers.Dense(256, activation='relu'),
+        tf.keras.layers.Dense(256, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(1, activation='linear')
+    ])
+    model.compile(
+        optimizer = 'adam',
+        loss = 'mean_squared_error',
+    )
+    return model
+
+# model 5
+def create_model5():  
+    model = tf.keras.models.Sequential([
+        tf.keras.layers.Dense(512, activation='relu', input_dim=X_train.shape[1]),
+        tf.keras.layers.Dense(256, activation='relu'),
+        tf.keras.layers.Dense(256, activation='relu',
+                             activity_regularizer=tf.keras.regularizers.L1(0.1)),
+        tf.keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.Dense(128, activation='relu',
+                             activity_regularizer=tf.keras.regularizers.L1(0.1)),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu',
+                             activity_regularizer=tf.keras.regularizers.L1(0.1)),
+        tf.keras.layers.Dense(1, activation='linear')
+    ])
+    model.compile(
+        optimizer = 'adam',
+        loss = 'mean_squared_error',
+    )
+    return model
+
+# model 6
+def create_model6():  
+    model = tf.keras.models.Sequential([
+        tf.keras.layers.Dense(512, activation='relu', input_dim=X_train.shape[1]),
+        tf.keras.layers.Dense(256, activation='relu'),
         tf.keras.layers.Dense(256, activation='relu'),
         tf.keras.layers.Dense(128, activation='relu'),
         tf.keras.layers.Dense(128, activation='relu'),
         tf.keras.layers.Dense(64, activation='relu'),
-        tf.keras.layers.Dense(16, activation='relu'),
-        tf.keras.layers.Dense(16, activation='relu'),
-        tf.keras.layers.Dense(8, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
         tf.keras.layers.Dense(1, activation='linear')
     ])
     model.compile(
@@ -116,88 +205,73 @@ def create_mod1():
     return model
 
 
-mod1 = create_mod1()
-mod1_path = "mod1/mod1cp.ckpt"
-mod1_callback = tf.keras.callbacks.ModelCheckpoint(
-    filepath=os.path.join(WEIGHT_DIR, mod1_path),
+# -
+
+mod = create_model6()
+mod.summary()
+mod_path = "mod6/cp.ckpt"
+mod_checkpoint = tf.keras.callbacks.ModelCheckpoint(
+    filepath=os.path.join(WEIGHT_DIR, mod_path),
     save_weights_only = True,
     monitor = 'val_loss',
     mode = "min",
     verbose = 0,
     save_best_only = True
 )
-mod1_history = mod1.fit(train, 
-                        epochs = 1000, 
-                        validation_data = val, 
-                        callbacks = [mod1_callback],
-                        verbose = 2,
+mod_earlystop = tf.keras.callbacks.EarlyStopping(
+    monitor = 'val_loss',
+    mode = "min",
+    patience = 100,
+    restore_best_weights = True
 )
-mod1_loss = mod1.evaluate(val)
-print('Model 1 Loss {}'.format(mod1_loss))
 
-plt.plot(mod1_history.history['val_loss'])
-plt.plot(mod1_history.history['loss'])
-plt.title('model MSE loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.legend(['validation', 'train'], loc='upper left')
-plt.show()
-
-print(np.argmin(mod1_history.history['loss']),
-      np.argmin(mod1_history.history['val_loss']))
-
-print(min(mod1_history.history['loss']),
-      min(mod1_history.history['val_loss']))
-
-test_mod = create_mod1()
-test_mod.load_weights(os.path.join(WEIGHT_DIR, "mod1/mod1cp.ckpt"))
-
-test_mod.evaluate(val)
-
-test_mod.evaluate(test)
-
-mod1.evaluate(test)
-
-np.mean((mod1.predict(test).reshape((len(y_test),)) - y_test)**2)
-
-
-# model 2
-def create_mod2():  
-    model = tf.keras.models.Sequential([
-        tf.keras.layers.Dense(256, activation='relu', input_shape=(X_train.shape[1], )),
-        tf.keras.layers.Dense(128, activation='relu'),
-        tf.keras.layers.Dense(64, activation='relu'),
-        tf.keras.layers.Dropout(0.2),
-        tf.keras.layers.Dense(1, activation='linear')
-    ])
-    model.compile(
-        optimizer = 'adam',
-        loss = 'mean_squared_error',
-    )
-    return model
-
-
-mod2 = create_mod2()
-mod2_callback = tf.keras.callbacks.ModelCheckpoint(
-    filepath=os.path.join(WEIGHT_DIR, "mod2cp.ckpt"),
-    save_weights_only=True,
-    verbose=2
-)
-mod2_history = mod2.fit(
-    train, epochs = 500, 
-    validation_data = val,
-    callbacks = [mod2_callback],
+mod_history = mod.fit(
+    X_train, y_train,
+    batch_size = 64, # default batch_size = 32
+    epochs = 1000, 
+    callbacks = [mod_earlystop, mod_checkpoint],
+    validation_data = (X_val, y_val),
     verbose = 2
 )
-mod2_loss = mod2.evaluate(val)
-print('Model 2 Loss {}'.format(mod2_loss))
+mod_loss = mod.evaluate(X_val, y_val)
+print('Model Loss {}'.format(mod_loss))
 
-print(mod2_history.history.keys())
+mod.evaluate(X_test, y_test) # test mse loss
 
-plt.plot(mod2_history.history['loss'])
-plt.plot(mod2_history.history['val_loss'])
+plt.plot(mod_history.history['loss'])
+plt.plot(mod_history.history['val_loss'])
 plt.title('model MSE loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'validation'], loc='upper left')
+plt.show()
+
+print(np.argmin(mod_history.history['loss']),
+      np.argmin(mod_history.history['val_loss']))
+print(min(mod_history.history['loss']),
+      min(mod_history.history['val_loss']))
+
+best_mod = create_model()
+best_mod.load_weights(os.path.join(WEIGHT_DIR, "mod6/cp.ckpt"))
+best_mod_trainmse = best_mod.evaluate(X_train, y_train)
+best_mod_testmse = best_mod.evaluate(X_test, y_test)
+best_mod_trainrmse = best_mod_trainmse ** 0.5
+best_mod_testrmse = best_mod_testmse ** 0.5
+print(best_mod_trainmse, best_mod_testmse, best_mod_trainrmse, best_mod_testrmse)
+
+# train and test mse & rmse for all models
+models_loss=np.array([[30993.244140625, 29201.421875, 28928.923828125,
+                          27136.6113, 18496.9453125, 13529.3379],
+                     [37051.4375, 33454.6484375, 35293.98828125, 
+                          28654.7812, 51757.32421875, 16877.2148],
+                     [176.04898221979303, 170.88423530273352, 170.08504880830944,
+                         164.7319377902324, 136.00347536919782, 116.3156820494339],
+                     [192.48749959412947, 182.9061191909664, 187.86694302417868,
+                         169.27723193034555, 227.50236090807937, 129.91233522552815]])
+
+plt.plot(['model1', 'model2', 'model3', 'model4', 'model5', 'model6'], models_loss[2,])
+plt.plot(['model1', 'model2', 'model3', 'model4', 'model5', 'model6'], models_loss[3,])
+plt.title('Models RMSE Comparison')
+plt.ylabel('RMSE')
+plt.legend(['train', 'test'], loc='upper left')
 plt.show()
