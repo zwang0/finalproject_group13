@@ -1,10 +1,27 @@
-
-
-#Random Forest
 library(rpart)
 library(rattle)
 library(rpart.plot)
 library(randomForest)
+
+bike_data = read.csv('SeoulBikeData.csv')
+head(bike_data)
+
+bike_data$Date = as.Date(bike_data$Date, "%d/%m/%Y")
+bike_data$Year = factor(format(bike_data$Date, "%Y"))
+bike_data$Month = factor(months(bike_data$Date))
+bike_data$Day = factor(format(bike_data$Date, "%d"))
+bike_data$DWeek = factor(weekdays(bike_data$Date))
+bike_data$Seasons=as.factor(bike_data$Seasons)
+bike_data$Functioning.Day=as.factor(bike_data$Functioning.Day)
+bike_data$Holiday=as.factor(bike_data$Holiday)
+
+#Random Forest
+
+
+index <- 1:nrow(bike_data)
+testindex <- sample(index, trunc(length(index)*0.2))
+testset <- bike_data[testindex,-1]
+trainset <- bike_data[-testindex,-1]
 
 #classification trees
 
@@ -14,20 +31,7 @@ tree.hitters<-rpart(Rented.Bike.Count~.,
                     data=trainset)
 fancyRpartPlot(tree.hitters,sub="")
 
-n<-nrow(trainset)
-rss_here <- rep(0,n) 
-for(i in 1:n){
-  tree.hittersCV <-rpart(Rented.Bike.Count~.,
-                         method="anova",
-                         cp=0.02,
-                         data=trainset[-i,])
 
-  yhat <- predict(tree.hittersCV, newdata = trainset[i,])
-  
-  rss_here[i] <- (trainset$Rented.Bike.Count[i] - yhat)^2
-}
-#RMSE for train
-sqrt(mean(rss_here))
 #for testset
 tree.pred <- predict(tree.hitters, testset[,-1])
 tree.MSE <- crossprod(tree.pred - testset[,1]) / length(testindex)
@@ -38,10 +42,10 @@ sqrt(tree.MSE)
 set.seed(200)
 bag.bike<-randomForest(Rented.Bike.Count~.,
                        mtry=12,
-                        importance=TRUE,
-                        ntree=500,
-                        data=trainset,
-                        compete=FALSE)
+                       importance=TRUE,
+                       ntree=200,
+                       data=trainset,
+                       compete=FALSE)
 bag.bike
 #CER:percent increase in OOB error
 dotchart(importance(bag.bike)[,1])
@@ -61,17 +65,17 @@ sqrt(mean((trainset$Rented.Bike.Count-predict.OOB)^2))
 #for testset
 bag.pred <- predict(bag.bike, testset[,-1])
 bag.MSE <- crossprod(bag.pred - testset[,1]) / length(testindex)
-sqrt(rf.MSE)
+sqrt(bag.MSE)
 
 #random Forest
 
 set.seed(200)
 rf.bike<-randomForest(Rented.Bike.Count~.,
-                       mtry=sqrt(12),
-                       importance=TRUE,
-                       ntree=500,
-                       data=trainset,
-                       compete=FALSE)
+                      mtry=sqrt(12),
+                      importance=TRUE,
+                      ntree=100,
+                      data=trainset,
+                      compete=FALSE)
 rf.bike
 #CER:percent increase in OOB error
 dotchart(importance(rf.bike)[,1])
