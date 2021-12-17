@@ -36,16 +36,22 @@ would be the covariates of the model.
 
 ## Methodology
 ### Linear Regression
+Linear Regression Model (LM) is the simplest method to analyze the relationship of outcome Y and predictor X. The model is defined as below.
+\begin{align}
+Y=\beta_0 + X^T\beta
+\end{align}
+In the regression, after we input the data of X and Y, the coefficients $\beta_0$ and $\beta$ could be estimated by solving the equation.
+
 ### LASSO
 ### Ridge
 ### Random Forest
 ### Support Vector Machine
-The Support Vector Machine(SVM) was designed for classification, and later the
-idea was generalized to regression. The optimization idea in SVM classification
-is to increase the amount of separation between two classes. However, in SVM
+Support Vector Machine(SVM) was designed for classification, and later the idea
+was generalized to regression. The optimization idea in SVM classification is to
+increase the amount of separation between two classes. However, in SVM
 regression, we would like to form a "band" around the true regression function
 that contains most of the points. With this purpose, the loss function is
-defined,
+defined as below.
 \begin{align}
 \mu(x)=\beta_0 + x^T\beta
 \end{align}
