@@ -226,7 +226,9 @@ p1=ggplot(bike_data, aes(x=Rented_Bike_Count)) +
   labs(title="Figure 1. Histogram for Rented Bike Count", x="Rented Bike Count", y="Count")+
   theme_stata() +
   scale_color_stata() +
-  theme(plot.title = element_text(hjust = 0.5),legend.position = "None",axis.text.x = element_text(angle=-25))
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "None")+
+  theme(axis.text=element_text(size=6),
+        axis.title=element_text(size=4,face="bold"),plot.title = element_text(size = 10, face = "bold"))
   
 # Plot Average count by week 
 p2=ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
@@ -237,25 +239,32 @@ p2=ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   labs(fill = "Day of Week") + 
   theme_stata() +
   scale_color_stata() +
- theme(plot.title = element_text(hjust = 0.5),legend.position = "None"
-        ,axis.text.x = element_text(angle=-25),axis.text.y = element_text(angle=-65))
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "None",,axis.text.x = element_text(angle=-25),axis.text.y = element_text(angle=-65))+
+  theme(axis.text=element_text(size=6),
+        axis.title=element_text(size=6,face="bold"))
 
 # Plot Average count vs hour by seasons
 p3=ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
    stat_summary(geom = "line", fun = mean)+
    stat_summary(geom = "point", fun = mean)+
-   ggtitle("Figure 3. Average Count vs Hour \n grouped by Seasons")+
+   ggtitle("Figure 3. Average Count vs Hour grouped by Seasons")+
   xlab("Hour") + 
-  ylab("Rent count") 
-
+  ylab("Rent count") +
+  #theme_stata() +
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "None")+
+  theme(axis.text=element_text(size=6),
+        axis.title.x = element_text(size = 6),axis.title.y = element_text(size = 6),plot.title = element_text(size = 10, face = "bold"))
 #plot correlation
 my_data <- bike_data[, 2:11]
 colnames(my_data)[c(1,3:10)] <- c('Count', 'Temp', 'Humiditity', 'Wind', 'Visb', 'Dew', 'Solar','Rain','Snow')
 M <-cor(my_data)
 p4=ggcorrplot(M,  type = "lower",
-     outline.col = "white",lab = TRUE)+
-  labs(title = "Correlation Matrix ") 
-  
+     outline.col = "white",lab = TRUE,lab_size= 1,tl.cex = 5,show.legend=FALSE)+
+  labs(title = "Figure 4.Correlation Matrix ")+
+  theme(axis.text=element_text(size=8),
+        axis.title=element_text(size=4,face="bold"))
+
+
 ggarrange(p1,p2,p3,p4,nrow=2, ncol=2) 
 
 
