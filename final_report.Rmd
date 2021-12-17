@@ -36,11 +36,13 @@ would be the covariates of the model.
 
 ## Methodology
 ### Linear Regression
-Linear Regression Model (LM) is the simplest method to analyze the relationship of outcome Y and predictor X. The model is defined as below.
+Linear Regression Model (LM) is the simplest method to analyze the relationship
+of outcome Y and predictor X. The model is defined as below.
 \begin{align}
 Y=\beta_0 + X^T\beta
 \end{align}
-In the regression, after we input the data of X and Y, the coefficients $\beta_0$ and $\beta$ could be estimated by solving the equation.
+In the regression, after we input the data of X and Y, the coefficients
+$\beta_0$ and $\beta$ could be estimated by solving the equation.
 
 ### LASSO
 ### Ridge
@@ -72,14 +74,15 @@ speech recognition, and natural language processing.
 
 In this project, we are going to solve a regression problem and make a
 prediction using neural networks. Instead of applying Convolutional neural
-network or Recurrent neural network, we adopt the most basic one: *Feedforward Neural Network* 
-(FFNN). Feedforward neural network was the first type of artificial neural network
-devised. Different from recurrent neural networks, the connections between nodes
-do not form a circle. It has only one direction from input layer formed by input
-nodes, through hidden layers and to out the output layer formed by output nodes.
-Specifically, we will adopt *Multilayer Perceptron* (MLP). A multilayer
-perceptron consists of at least three layers of nodes: an input layer, a hidden
-layer and an output layer. There are 8 hidden layers in our model.
+network or Recurrent neural network, we adopt the most basic one: 
+*Feedforward Neural Network* (FFNN). Feedforward neural network was the first
+type of artificial neural network devised. Different from recurrent neural
+networks, the connections between nodes do not form a circle. It has only one
+direction from input layer formed by input nodes, through hidden layers and to
+out the output layer formed by output nodes. Specifically, we will adopt
+*Multilayer Perceptron* (MLP). A multilayer perceptron consists of at least
+three layers of nodes: an input layer, a hidden layer and an output layer. There
+are 8 hidden layers in our model.
 
 The toolkit we used for building the neural network is *Keras*. Keras is a deep
 learning API (application programming interface) written in Python, running on
