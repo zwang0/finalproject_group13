@@ -172,7 +172,7 @@ rental bike is high in Seoul.
 
 As shown in Figure 4, the corplot function creates a graph of a correlation
 matrix, coloring the regions according to the value correlation coefficients. A
-correlation value of 1 is considered as a total positive correlation, −1 is
+correlation value of 1 is considered as a total positive correlation, $-1$ is
 considered the total negative correlation, and if 0 no correlation exists
 between the variables. Positive correlations are notable between count and hour,
 temp, wind, visb, dew and solar. There is a negative correlation between count
