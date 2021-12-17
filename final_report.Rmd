@@ -128,6 +128,7 @@ The toolkit we used for building the neural network is *Keras*. Keras is a deep
 learning API (application programming interface) written in Python, running on
 top of the machine learning platform *TensorFlow*. The activation function we
 adopted are ReLU and Linear. Rectified Linear Unit (ReLU) is an activation
+<<<<<<< HEAD
 function that defines the positive part of its arguement. It can be expressed as
 $f(x) = x^{+} = \max(0, x)$. Linear is an activation function that simply
 returns the the argument itself. We also add regularizers that apply to a L1 and
@@ -138,6 +139,17 @@ improve the robustness and generality. By setting the batch size to 64, we run
 110 iterations per epoch with over 800 epochs for the optimal model.
 
 ## Dataset
+function that defines the positive part of its argument. It can be expressed as:
+\begin{align}
+f(x) = x^{+} = \max(0, x)
+\end{align}
+Linear is an activation function that simply returns the the argument itself. We
+also add regularizers that apply to a L1 and L2 penalty on the layer's output.
+L1 penalty is the penalty term in L1 regression or Lasso regression. L2 penalty
+is the penalty term in L2 regression or Ridge regression. Regularizers are used 
+to avoid model overfitting and improve the robustness and generality. 
+
+## Dataset 
 ### Data description
 
 The raw data is from the UCI machine learning repository which is a collection
@@ -284,9 +296,17 @@ models are not as good as the one without dropping input.
 
 
 ## Result
+We did 10-fold cross-validation in model training, and used the average of 10
+outcomes to be the RMSE of each training model. The table below shows the RMSE
+value of the trained regression models both in testing and training sets. As we
+can see, the NN model has the lowest RMSE in both the train set and test set.
+The bagging Forest model (BagF) also has an excellent performance among the
+models of basic machine learning methods. The models of LM, LASSO and Ridge
+produce the worst results compared to other models. The multicollinearity of
+covariates may be the main cause the unsatisfying results.
 
  Method | Training | Testing
-   :-:  |   :-:    |   :-:
+   :-  |   :-:    |   :-:
  LM     | 407.0000 | 417.0000
  Ridge  | 427.1653 | 437.7671
  LASSO  | 427.3688 | 437.4730
