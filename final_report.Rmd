@@ -12,6 +12,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Introduction
 
 ## Methodology
+### Linear Regression
+### LASSO
+### Ridge
+### Random Forest
+### Support Vector Machine
+### Neural Network
 
 ## Dataset description
 
