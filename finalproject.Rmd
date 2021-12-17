@@ -84,7 +84,7 @@ ggplot(bike_data, aes(x=Month, y=Rented_Bike_Count ,fill= Month))+
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None",
         axis.text.x = element_text(angle=-25))
 ```
-
+# plot
 ```{r}
 # plot Bike Count vs Hour, group by weekdays, month, season, year
 ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
@@ -114,9 +114,10 @@ corrplot(M, method = "color", type = "upper", addCoef.col = "black",
          col=brewer.pal(n=8, name="RdYlBu"), tl.srt = 30)
 ```
 
+#plot importance
 ```{r}
 library(Boruta)
-bike_data <- bike_data[, -1] # you may declare a new dataset name
+bike_data <- bike_data[, -1] 
 boruta.train <- Boruta(Rented_Bike_Count~.,data=bike_data, doTrace = 2)
 plot(boruta.train, xlab = "", xaxt = "n")
 lz<-lapply(1:ncol(boruta.train$ImpHistory),function(i)
