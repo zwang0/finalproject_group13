@@ -43,70 +43,52 @@ of outcome Y and predictor X. The model is defined as below.
 \begin{align}
 Y=\beta_0 + X^T\beta
 \end{align}
-In the regression, after we input the data of X and Y, the coefficients
-$\beta_0$ and $\beta$ could be estimated by solving the equation.
+In the regression, the coefficients $\beta_0$ and $\beta$ could be estimated by 
+solving the equation.
 
 ### Ridge
 Ridge regression estimates coefficients of multiple linear regression with the 
 aim for lower variance. By minimizing the shrinkage penalty, 
 $\lambda \Sigma_{j=1}^k |\hat{\beta_j^2}|$, along with RSS, unnecessary
-estimated coefficients could be shrunk.
-
-The coefficient $\lambda$ controls the magnitude of the penalty. As it increase, 
+estimated coefficients could be shrunk.The coefficient $\lambda$ controls the magnitude of the penalty. As it increase, 
 coefficients tend towards 0, leading to low variance and low bias.
 
 ### LASSO
 Lasso regression is a type of linear regression similar to Ridge, minimizing 
 shrinkage penalty $\lambda \Sigma_{j=1}^k |\hat{\beta_j}|$,  but performs 
-selection in addition to shrinkage.
-
-As the coefficient $\lambda$ increase, coefficients of LASSO model could be 
+selection in addition to shrinkage.As the coefficient $\lambda$ increase, coefficients of LASSO model could be 
 shurnk to absolute zero, resulting in removing variables.
 
-### Random Forest
-Random forest generates a large number of bootstrapped decision trees, which
-performs binary splits on data at decision nodes, which are defined with a
-predictors' levels. At each node, features are selected from a random sub sample
-of all features in the dataset. The feature that could split the dataset in a
-way that minimizes RSS for the model is selected. This procedure increases the
-speed of model building as well as  the variety in the use of features.
-  
-Out of Bag(OOB) score is used to validate random forest models. OOB samples are
-left-outs of each bootstrapping samples, used as a testset. OOB score is
-computed as the number of correctly predictions, while OOB error rate is the
-number of wrong classifications of OOBs.
+### Random Forest and Bagging Forest 
+Random forest and Bagging forest generate a large number of bootstrapped
+decision trees, which perform binary splits on data at decision nodes, which are
+defined with a predictors’ levels. At each node, features are selected from a
+random subsample of all features in the dataset. The feature that could split
+the dataset in a way that minimizes RSS for the model is selected. Out of
+Bag(OOB) score is used to validate random forest models. OOB samples are
+left-outs of each bootstrapping sample, used as a testset. OOB score is computed
+as the number of correct predictions, while OOB error rate is the number of
+wrong classifications of OOBs. Variables in the model are assessed by variable
+importance, which is penalized for large OOB error rate.
+A fundamental difference between bagging forest and random forest is that at
+each node, all features in the dataset are compared against each other.
+Therefore random forest increases the speed of model building as well as the
+variety in the use of features. Bagging forest is slower in model building speed
+and more restricted in the use of features in split ting. On the other hand, it
+could bring higher predictive accuracy, having better performance in minimizing
+MSE.
 
-Variables in the model is assessed by variable importance, which is penalized
-for large OOB error rate.
-
-### Bagging Forest
-Bagging forest is similar to Random Forest, generating bootstrapped decision 
-trees and using features that minimizes model RSS as the node to perform binary 
-split. A fundamental difference between bagging forest and random forest is that 
-at each node, all features in the dataset are compared against each other. 
-
-Therefore bagging forest is slower in model building speed and more restricted 
-in the use of features in splitting. On the other hand, it could bring higher 
-predictive accuracy, having better performance in minimizing MSE.
-
-Out of Bag(OOB) score is also used to validate bagging forest models. Variables 
-in the model is assessed by variable importance, which is penalized for large 
-OOB error rate as well. 
-  
 ### Support Vector Machine
-Support Vector Machine(SVM) was designed for classification, and later the idea
-was generalized to regression.[2] The optimization idea in SVM classification is
-to increase the amount of separation between two classes. However, in SVM
+Support Vector Machine(SVM) was designed for classification, gand later the idea
+was generalized to regression. SVM regression is used in this project. In SVM
 regression, we would like to form a "band" around the true regression function
 that contains most of the points. With this purpose, the loss function is
-defined as below.
-\begin{align}
-\mu(x)=\beta_0 + x^T\beta
-\end{align}
+defined as below. 
+\begin{align} \mu(x)=\beta_0 + x^T\beta \end{align} 
 If the point (X,Y) = (x,y) is such that $|y-\mu(x)|\leq \epsilon$, then the loss
-is taken to be zero; if $|y-\mu(x)|\geq \epsilon$, then the loss is taken to be
-$|y-\mu(x)|- \epsilon$. The main goal is to find a $\mu(x)$ such that most
-points with the loss taken to be zero.
+is taken to be zero; otherwise the loss is taken to be $|y-\mu(x)|- \epsilon$.
+The main goal is to find a $\mu(x)$ such that most points with the loss taken to
+be zero.
 
 ### Neural Network
 Neural networks (NNs) are computing systems inspired by the way biological
