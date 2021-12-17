@@ -202,6 +202,7 @@ library(corrplot)
 library(RColorBrewer)
 require(gridExtra)
 library(ggcorrplot)
+library("ggpubr")
 ```
 
 Figure 2 displays an average number of the day throughout the week. It is shown
@@ -241,7 +242,8 @@ p2=ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   labs(fill = "Day of Week") + 
   theme_stata() +
   scale_color_stata() +
-  theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
+ theme(plot.title = element_text(hjust = 0.5),legend.position = "None"
+        ,axis.text.x = element_text(angle=-25),axis.text.y = element_text(angle=-65))
 
 # Plot Average count vs hour by seasons
 p3=ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
