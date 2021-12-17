@@ -10,6 +10,29 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
+Bike-Sharing systems are currently widely introduced in urban cities to solve the 
+“last mile” problem, improve the link between other modes of transportation. 
+Bike-sharing systems facilitate the use of public transportation, enhance traffic 
+troubles, as well as minimize greenhouse gas emissions. However, the availability 
+and accessibility of sharing bikes could be a problem since the demand and supply 
+of bikes are not stable.
+
+This project aims to use machine learning and data-mining-based  algorithms to 
+predict the demand for rental bikes in Seoul city at each hour in order to provide 
+a stable bike supply. The project is based on the dataset downloaded at UC Irvine 
+Machine Learning Repository. The dataset contains the hourly public rental number 
+of Seoul bikes with date and weather information (Temperature, Humidity, Windspeed, 
+Visibility, Dewpoint, Solar radiation, Snowfall, Rainfall) for one year from December 
+2017 to November 2018, 365 days. The number of rental bikes rented at every hour 
+is determined from the bike rental history data collected from the Seoul Public 
+Data Park website of South Korea.[1]
+
+As all modes of transportation depend primarily on the weather conditions, including 
+cycling, we would assume that the corresponding climate conditions have effects 
+on the total number of rental bikes rented at each hour. And we would also assume 
+that date parameters such as weekdays may enhance the performance of the prediction 
+model. Thus, weather details and date parameters would be the covariates of the 
+model.
 
 ## Methodology
 ### Linear Regression
