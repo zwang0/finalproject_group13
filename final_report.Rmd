@@ -82,7 +82,9 @@ was generalized to regression. SVM regression is used in this project. In SVM
 regression, we would like to form a "band" around the true regression function
 that contains most of the points. With this purpose, the loss function is
 defined as below. 
-\begin{align} \mu(x)=\beta_0 + x^T\beta \end{align} 
+\begin{align} 
+\mu(x)=\beta_0 + x^T\beta 
+\end{align} 
 If the point (X,Y) = (x,y) is such that $|y-\mu(x)|\leq \epsilon$, then the loss
 is taken to be zero; otherwise the loss is taken to be $|y-\mu(x)|- \epsilon$.
 The main goal is to find a $\mu(x)$ such that most points with the loss taken to
