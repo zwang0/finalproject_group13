@@ -225,7 +225,7 @@ ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
    stat_summary(geom = "point", fun = mean)+
    ggtitle("Fig 4. Average Count vs Hour grouped by Seasons")+
   xlab("Hour") + 
-  ylab("Rent count")  + 
+  ylab("Rent count") 
 
 #plot correlation
 my_data <- bike_data[, 2:11]
