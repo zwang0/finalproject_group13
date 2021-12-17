@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+#import data
 ```{r}
 library(tidyverse)
 bike_data = read.csv('data/SeoulBikeData.csv')
@@ -28,7 +29,6 @@ head(bike_data)
 # Holiday - Holiday/No holiday
 # Functional Day - NoFunc(Non Functional Hours), Fun(Functional hours)
 ```
-
 ```{r}
 # add year, month, day, and days of week
 # notice that 
