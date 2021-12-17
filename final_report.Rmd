@@ -21,8 +21,8 @@ This project aims to use machine learning and data-mining-based  algorithms to
 predict the demand for rental bikes in Seoul city at each hour in order to provide 
 a stable bike supply. The project is based on the dataset downloaded at UC Irvine 
 Machine Learning Repository. The dataset contains the hourly public rental number 
-of Seoul bikes with date and weather information (Temperature, Humidity, Windspeed, 
-Visibility, Dewpoint, Solar radiation, Snowfall, Rainfall) for one year from December 
+of Seoul bikes with date and weather information (Temperature, Humidity, Wind speed, 
+Visibility, Dew point, Solar radiation, Snowfall, Rainfall) for one year from December 
 2017 to November 2018, 365 days. The number of rental bikes rented at every hour 
 is determined from the bike rental history data collected from the Seoul Public 
 Data Park website of South Korea.[1]
