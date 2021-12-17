@@ -46,6 +46,7 @@ $\beta_0$ and $\beta$ could be estimated by solving the equation.
 
 ### LASSO
 ### Ridge
+### Bagged Forest
 ### Random Forest
 ### Support Vector Machine
 Support Vector Machine(SVM) was designed for classification, and later the idea
