@@ -93,8 +93,8 @@ OOB error rate as well.
   
 ### Support Vector Machine
 Support Vector Machine(SVM) was designed for classification, and later the idea
-was generalized to regression.[2] The optimization idea in SVM classification is to
-increase the amount of separation between two classes. However, in SVM
+was generalized to regression.[2] The optimization idea in SVM classification is
+to increase the amount of separation between two classes. However, in SVM
 regression, we would like to form a "band" around the true regression function
 that contains most of the points. With this purpose, the loss function is
 defined as below.
@@ -202,6 +202,8 @@ library("psych")
 library(corrplot)
 library(RColorBrewer)
 require(gridExtra)
+library(ggcorrplot)
+library("ggpubr")
 ```
 
 Figure 2 displays an average number of the day throughout the week. It is shown
@@ -222,7 +224,7 @@ humidity, rain and snow respectively. These correlation values imply that the
 weather variables are related to the rental bike count at each hour.
 
 ```{r}
-ggplot(bike_data, aes(x=Rented_Bike_Count)) +
+p1=ggplot(bike_data, aes(x=Rented_Bike_Count)) +
     geom_histogram(binwidth=110,
                    fill="lightblue", 
                    col="orange",
@@ -230,10 +232,10 @@ ggplot(bike_data, aes(x=Rented_Bike_Count)) +
   labs(title="Figure 1. Histogram for Rented Bike Count", x="Rented Bike Count", y="Count")+
   theme_stata() +
   scale_color_stata() +
-  theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "None",axis.text.x = element_text(angle=-25))
   
 # Plot Average count by week 
-ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
+p2=ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   geom_bar(stat = "identity") +
   ggtitle("Figure 2. Average Count by Week")+
   xlab("Day of Week") + 
@@ -241,13 +243,14 @@ ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   labs(fill = "Day of Week") + 
   theme_stata() +
   scale_color_stata() +
-  theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
+ theme(plot.title = element_text(hjust = 0.5),legend.position = "None"
+        ,axis.text.x = element_text(angle=-25),axis.text.y = element_text(angle=-65))
 
 # Plot Average count vs hour by seasons
-ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
+p3=ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
    stat_summary(geom = "line", fun = mean)+
    stat_summary(geom = "point", fun = mean)+
-   ggtitle("Figure 3. Average Count vs Hour grouped by Seasons")+
+   ggtitle("Figure 3. Average Count vs Hour \n grouped by Seasons")+
   xlab("Hour") + 
   ylab("Rent count") 
 
@@ -255,11 +258,13 @@ ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
 my_data <- bike_data[, 2:11]
 colnames(my_data)[c(1,3:10)] <- c('Count', 'Temp', 'Humiditity', 'Wind', 'Visb', 'Dew', 'Solar','Rain','Snow')
 M <-cor(my_data)
-corrplot(M, method = "color", type = "upper", 
-          addCoef.col = "black",number.cex=0.75, tl.col = "darkblue",
-         diag = FALSE,col=brewer.pal(n=8, name="RdYlBu"), tl.srt = 30, 
-         title="Figure 4. Correlation Plot" ,
-          mar=c(0,0,1,0))
+p4=ggcorrplot(M,  type = "lower",
+     outline.col = "white",lab = TRUE)+
+  labs(title = "Correlation Matrix ") 
+  
+ggarrange(p1,p2,p3,p4,nrow=2, ncol=2) 
+
+
 ```
 
 ## Evaluation index
@@ -275,6 +280,12 @@ RMSE=\sqrt{\frac{\sum^n_{i=1}(Y_i-\hat{Y_i})^2}{n}}
 ## Model development
 It is essential to tuning parameters in order to find the optimal model with
 relatively low loss or error values.
+
+For the SVM models, there are two tuning parameters, namely cost and sigma. The
+first search for cost was within the range 1 to 100 and for sigma was from 0.01
+to 0.1 are used. The optimal values are 20 and 0.1. Then we did a more specific
+grid search around these two values. The optimal values sigma (0.11) and cost
+(20) were selected as the best combination of parameters.
 
 When building neural networks, we have tried different size of the hidden
 layers. Greater number of nodes in the layer indicates more parameters would be
@@ -298,7 +309,6 @@ portion (i.e. 20%) of the input in specific layer while training. But later we
 find that the performance of these models are not as good as the one without
 dropping input.
 ![RMSE Comparison between Models](graphs/nn_models_RMSE_Compare.png)
-
 
 ## Result
 We did 10-fold cross-validation in model training, and used the average of 10
