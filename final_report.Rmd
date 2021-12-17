@@ -43,8 +43,8 @@ of outcome Y and predictor X. The model is defined as below.
 \begin{align}
 Y=\beta_0 + X^T\beta
 \end{align}
-In the regression, after we input the data of X and Y, the coefficients
-$\beta_0$ and $\beta$ could be estimated by solving the equation.
+In the regression, the coefficients $\beta_0$ and $\beta$ could be estimated by 
+solving the equation.
 
 ### Ridge
 Ridge regression estimates coefficients of multiple linear regression with the 
