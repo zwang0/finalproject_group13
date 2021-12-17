@@ -280,6 +280,8 @@ RMSE=\sqrt{\frac{\sum^n_{i=1}(Y_i-\hat{Y_i})^2}{n}}
 It is essential to tuning parameters in order to find the optimal model with
 relatively low loss or error values.
 
+For the SVM models, there are two tuning parameters, namely cost and sigma. The first search for cost was within the range 1 to 100 and for sigma was from 0.01 to 0.1 are used. The optimal values are 20 and 0.1. Then we did a more specific grid search around these two values. The optimal values sigma (0.11) and cost (20) were selected as the best combination of parameters.
+
 When building neural networks, we have tried different size of the hidden
 layers. Greater number of nodes in the layer indicates more parameters would be
 used for training and model fitting. We believe that it is more likely to fit a
@@ -288,9 +290,7 @@ model, to 8, the final optimal model. We also try different number of nodes
 ranging from 1 to 512 in different layers. There are more nodes in the first few
 hidden layers, and the nodes number keep reducing until the size of output
 (which is 1 since we only need to make a prediction of the number of rented
-bike).
-
-However, large number of parameters may also bring the problem: overfit. To
+bike).However, large number of parameters may also bring the problem: overfit. To
 solve this problem, we constraint the complexity of the model. No more than 8
 hidden layers and no more than 512 number of nodes in each layers. Typically, we
 adopt 256 or 64 nodes per layer. Futhermore, we introduce regularizers that add
