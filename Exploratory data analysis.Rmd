@@ -85,6 +85,19 @@ ggplot(bike_data, aes(x=Month, y=Rented_Bike_Count ,fill= Month))+
         axis.text.x = element_text(angle=-25))
 ```
 # plot
+
+```{r, include=FALSE}
+  ggplot(bike_data, aes(x=Rented_Bike_Count)) +
+    geom_histogram(binwidth=110,
+                   fill="lightblue", 
+                   col="orange",
+                   alpha = .8)+
+  labs(title="Fig 1. Histogram for Rented Bike Count", x="Rented Bike Count", y="Count")+
+  theme_stata() +
+  scale_color_stata() +
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
+```
+
 ```{r}
 # plot Bike Count vs Hour, group by weekdays, month, season, year
 ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
@@ -99,6 +112,28 @@ ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Month)) +
 ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Year)) +
    stat_summary(geom = "line", fun = mean)+
    stat_summary(geom = "point", fun = mean)
+```
+```{r}
+# Plot Average count by week 
+ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
+  geom_bar(stat = "identity") +
+  ggtitle("Fig 2. Average Count by Week")+
+  xlab("Day of Week") + 
+  ylab("Rent count")  + 
+  labs(fill = "Day of Week") + 
+  theme_stata() +
+  scale_color_stata() +
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
+# Plot Average count by month
+ggplot(bike_data, aes(x=Month, y=Rented_Bike_Count ,fill= Month))+
+  geom_bar(stat = "identity") +
+  ggtitle("Fig 3. Average Count \n by Month")+
+  xlab("Month") + 
+  ylab("Rent count")  + 
+  labs(fill = "Month") + 
+  theme_stata() +
+  scale_color_stata() +
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "None",axis.text.x = element_text(angle=-25))
 ```
 
 ```{r}
