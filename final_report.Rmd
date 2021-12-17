@@ -114,34 +114,17 @@ neural networks in the human brain process information. The tasks to which
 neural networks are applied tend to fall within the following broad categories
 including regression analysis, classification, and data processing.
 
-In this project, we are going to solve a regression problem and make a
-prediction using neural networks. Instead of applying Convolutional neural
-network or Recurrent neural network, we adopt the most basic one: 
-*Feedforward Neural Network* (FFNN). Feedforward neural network was the first
-type of artificial neural network devised. Different from recurrent neural
-networks, the connections between nodes do not form a circle. It has only one
-direction from input layer formed by input nodes, through hidden layers and to
-out the output layer formed by output nodes. Specifically, we will adopt
+We adopt the most basic one: *Feedforward Neural Network* (FFNN). Feedforward
+neural network was the first type of artificial neural network devised. It has
+only one direction from input layer formed by input nodes, through hidden layers
+and to out the output layer formed by output nodes. Specifically, we will adopt
 *Multilayer Perceptron* (MLP). A multilayer perceptron consists of at least
 three layers of nodes: an input layer, a hidden layer and an output layer. There
 are 8 hidden layers in our model.
 
 The toolkit we used for building the neural network is *Keras*. Keras is a deep
 learning API (application programming interface) written in Python, running on
-top of the machine learning platform *TensorFlow*. The activation function we
-adopted are ReLU and Linear. Rectified Linear Unit (ReLU) is an activation
-
-function that defines the positive part of its arguement. It can be expressed as:
-\begin{align}
-f(x) = x^{+} = \max(0, x)
-\end{align}
-Linear is an activation function that simply returns the the argument itself. We
-also add regularizers that apply to a L1 and L2 penalty on the layer's output.
-L1 penalty is the penalty term in L1 regression or Lasso regression. L2 penalty
-is the penalty term in L2 regression or Ridge regression. Regularizers are used
-to avoid model overfitting and improve the robustness and generality. By setting
-the batch size to 64, we run 110 iterations per epoch with over 800 epochs for
-the optimal model.
+top of the machine learning platform *TensorFlow*.
 
 ## Dataset
 
@@ -290,25 +273,37 @@ to 0.1 are used. The optimal values are 20 and 0.1. Then we did a more specific
 grid search around these two values. The optimal values sigma (0.11) and cost
 (20) were selected as the best combination of parameters.
 
-When building neural networks, we have tried different size of the hidden
-layers. Greater number of nodes in the layer indicates more parameters would be
-used for training and model fitting. We believe that it is more likely to fit a
-model with more parameters. Hence we add the hidden layers from 5, the starting
-model, to 8, the final optimal model. We also try different number of nodes
-ranging from 1 to 512 in different layers. There are more nodes in the first few
-hidden layers, and the nodes number keep reducing until the size of output
-(which is 1 since we only need to make a prediction of the number of rented
-bike). However, large number of parameters may also bring the problem: overfit.
-In the figure below, we can tell that the train and test RMSE have clear trends
-of decreasing, except for the unusual high test RMSE in model 5. This could be
-attributed to overfit. To solve this problem, we constraint the complexity of
-the model. No more than 8 hidden layers and no more than 512 number of nodes in
-each layers. Typically, we adopt 256 or 64 nodes per layer. Furthermore, we
-introduce regularizers that add L1 or L2 penalty to the model during training
-base on the magnitude of the activation. We also try to randomly dropout a
-portion (i.e. 20%) of the input in specific layer while training. But later we
-find that the performance of these models are not as good as the one without
-dropping input.
+When building neural networks, we have tried different sizes of the hidden
+layers. We believe that it is more likely to fit a model with more layers and
+parameters. Hence we add the hidden layers from 5, the starting model, to 8, the
+final optimal model. We also try different numbers of nodes ranging from 1 to
+512 in different layers. There are more nodes in the first few hidden layers,
+and the nodes number keeps reducing until the size of output (which is 1 since
+we only need to make a prediction of the number of rented bike). The activation
+function we adopted are ReLU and Linear. Rectified Linear Unit (ReLU) is an
+activation function that defines the positive part of its arguement. It can be
+expressed as:
+\begin{align}
+f(x) = x^{+} = \max(0, x)
+\end{align}
+Linear is an activation function that simply returns the the argument itself. We
+also add regularizers that apply to a L1 and L2 penalty on the layer's output.
+L1 penalty is the penalty term in L1 regression or Lasso regression. L2 penalty
+is the penalty term in L2 regression or Ridge regression. Regularizers are used
+to avoid model overfitting and improve the robustness and generality. By setting
+the batch size to 64, we run 110 iterations per epoch with over 800 epochs for
+the optimal model. A large number of parameters may also bring the problem of
+overfitting. In the figure below, we can tell that the train and test RMSE have
+clear trends of decreasing, except for the unusual high test RMSE in model 5.
+This could be attributed to overfitting. To solve this problem, we constraint
+the complexity of the model. No more than 8 hidden layers and no more than 512
+number of nodes in each layers. Typically, we adopt 256 or 64 nodes per layer.
+Furthermore, we introduce regularizers that add L1 or L2 penalty to the model
+during training base on the magnitude of the activation. We also try to randomly
+drop out a portion (i.e. 20%) of the input in specific layer while training. But
+later we find thfat the performance of these models is not as good as the one
+without dropping the input.
+
 ![History of Train and Validation MSE](graphs/nn_mod_mse.png) 
 ![RMSE Comparison between Models](graphs/nn_models_RMSE_Compare.png)
 
