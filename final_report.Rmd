@@ -230,7 +230,7 @@ p1=ggplot(bike_data, aes(x=Rented_Bike_Count)) +
   labs(title="Figure 1. Histogram for Rented Bike Count", x="Rented Bike Count", y="Count")+
   theme_stata() +
   scale_color_stata() +
-  theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "None",axis.text.x = element_text(angle=-25))
   
 # Plot Average count by week 
 p2=ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
@@ -247,7 +247,7 @@ p2=ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
 p3=ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
    stat_summary(geom = "line", fun = mean)+
    stat_summary(geom = "point", fun = mean)+
-   ggtitle("Figure 3. Average Count vs Hour grouped by Seasons")+
+   ggtitle("Figure 3. Average Count vs Hour \n grouped by Seasons")+
   xlab("Hour") + 
   ylab("Rent count") 
 
