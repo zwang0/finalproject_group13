@@ -101,13 +101,24 @@ to avoid model overfitting and improve the robustness and generality.
 ## Dataset description
 Data description
 
-The raw data is from the UCI machine learning repository which is a collection of 8,760 renting records from 2017 to 2018. There are 14 variables in the dataset. The table shows the features of each variable. The dataset contains weather information (Temperature, Humidity, Windspeed, Visibility, Dewpoint, Solar radiation, Snowfall, Rainfall), the number of bikes rented per hour and date information.
+The raw data is from the UCI machine learning repository which is a collection of 
+8,760 renting records from 2017 to 2018. There are 14 variables in the dataset. 
+The table shows the features of each variable. The dataset contains weather information 
+(Temperature, Humidity, Windspeed, Visibility, Dewpoint, Solar radiation, Snowfall, 
+Rainfall), the number of bikes rented per hour and date information.
 
 Exploratory data analysis
 
-The data set included in the UCI we used has been processed, so there is no missing data. What we have done is to extract day, month, year from date, and convert date to the day of week. The final rental bike data is partitioned into two namely, training set for building the regression and testing set for assessing the model performance. In a random way, 20% of the 8760 records were selected as the test set and the other 80% as the data of the training set. 
+The data set included in the UCI we used has been processed, so there is no missing 
+data. What we have done is to extract day, month, year from date, and convert date 
+to the day of week. The final rental bike data is partitioned into two namely, training 
+set for building the regression and testing set for assessing the model performance. 
+In a random way, 20% of the 8760 records were selected as the test set and the other 
+80% as the data of the training set. 
 
-Fig 1. shows the total number of rented bikes for the entire period. It illustrates that the rental bike count is highly variable at each hour. As can be seen, there is a long tail in the data distribution.
+Fig 1. shows the total number of rented bikes for the entire period. It illustrates 
+that the rental bike count is highly variable at each hour. As can be seen, there 
+is a long tail in the data distribution.
 ```{r}
   ggplot(bike_data, aes(x=Rented_Bike_Count)) +
     geom_histogram(binwidth=110,
@@ -119,7 +130,13 @@ Fig 1. shows the total number of rented bikes for the entire period. It illustra
   scale_color_stata() +
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
 ```
-Fig 2. displays an average number of the day throughout the week. It is shown that the count distribution follows identical trends over the weekdays and different patterns over the weekends. Fig 3. shows that the average count is high at each hour in the summer and low in the winter. The count is quite similar during autumn and spring. The count abruptly increases in hours 8 and 18. This is because the hours from 8 AM and 6 PM is regarded as the peak hours, during which the usage of the rental bike is high in Seoul.
+Fig 2. displays an average number of the day throughout the week. It is shown that the 
+count distribution follows identical trends over the weekdays and different patterns 
+over the weekends. Fig 3. shows that the average count is high at each hour in the 
+summer and low in the winter. The count is quite similar during autumn and spring. 
+The count abruptly increases in hours 8 and 18. This is because the hours from 8 AM 
+and 6 PM is regarded as the peak hours, during which the usage of the rental bike is 
+high in Seoul.
 ```{r}
 # Plot Average count by week 
 ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
@@ -143,7 +160,14 @@ ggplot(bike_data, aes(x=Month, y=Rented_Bike_Count ,fill= Month))+
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None",axis.text.x = element_text(angle=-25))
 ```
 
-As shown in Fig.(), the corplot function creates a graph of a correlation matrix, coloring the regions according to the value correlation coefficients. A correlation value of 1 is considered as a total positive correlation, −1 is considered total negative correlation, and if 0 no correlation exists between the variable. Positive correlations are notable between count and hour, temp, wind, visb, dew and solar. There is a negative correlation between count and humidity, rain and snow respectively. These correlation values imply that the weather variables are related to the rental bike count at each hour. 
+As shown in Fig.(), the corplot function creates a graph of a correlation matrix, 
+coloring the regions according to the value correlation coefficients. A correlation 
+value of 1 is considered as a total positive correlation, −1 is considered total 
+negative correlation, and if 0 no correlation exists between the variable. Positive 
+correlations are notable between count and hour, temp, wind, visb, dew and solar. 
+There is a negative correlation between count and humidity, rain and snow respectively. 
+These correlation values imply that the weather variables are related to the rental 
+bike count at each hour. 
 ```{r }
 #plot correlation
 library(corrplot)
@@ -201,6 +225,17 @@ models are not as good as the one without dropping input.
  NN     | 120.0056 | 133.2593
 
 ## Discussion
+Ridge and Lasso are used when n is not much larger than p, there can be a lot 
+of variability in the fit which can result in either overfitting and very poor 
+predictive ability. Our trainset has 7008 observations of 17 variables, which 
+implies we are in the case n>>p. Therefore, we don't have the problem that Ridge 
+and Lasso intended to solve. Furthermore, variable selection (like in Ridge and 
+Lasso) is useful when some predictors are not significant or predictors are 
+highly correlated. In our dataset, most predictors are highly significant, 
+correlation between them is moderate and VIFs aren't exaggerate. Thus, other 
+circumstances that could make variable selection useful don't hold here. 
+This explains why Lasso and Ridge regression didn’t perform well in our project.
+
 
 ## Citation
 
