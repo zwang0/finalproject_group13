@@ -141,7 +141,7 @@ is the penalty term in L2 regression or Ridge regression. Regularizers are used
 to avoid model overfitting and improve the robustness and generality. 
 
 ## Dataset description
-Data description
+### Data description
 
 The raw data is from the UCI machine learning repository which is a collection of 
 8,760 renting records from 2017 to 2018. There are 14 variables in the dataset. 
@@ -149,7 +149,7 @@ The table shows the features of each variable. The dataset contains weather info
 (Temperature, Humidity, Windspeed, Visibility, Dewpoint, Solar radiation, Snowfall, 
 Rainfall), the number of bikes rented per hour and date information.
 
-Exploratory data analysis
+### Exploratory data analysis
 
 The data set included in the UCI we used has been processed, so there is no missing 
 data. What we have done is to extract day, month, year from date, and convert date 
@@ -158,7 +158,7 @@ set for building the regression and testing set for assessing the model performa
 In a random way, 20% of the 8760 records were selected as the test set and the other 
 80% as the data of the training set. 
 
-Fig 1. shows the total number of rented bikes for the entire period. It illustrates 
+Figure 1 shows the total number of rented bikes for the entire period. It illustrates 
 that the rental bike count is highly variable at each hour. As can be seen, there 
 is a long tail in the data distribution.
 
@@ -187,13 +187,30 @@ require(gridExtra)
 
 ```
 
+Figure 2 displays an average number of the day throughout the week. It is shown that the 
+count distribution follows identical trends over the weekdays and different patterns 
+over the weekends. Figure 3 shows that the average count is high at each hour in the 
+summer and low in the winter. The count is quite similar during autumn and spring. 
+The count abruptly increases in hours 8 and 18. This is because the hours from 8 AM 
+and 6 PM is regarded as the peak hours, during which the usage of the rental bike is 
+high in Seoul.
+
+As shown in Figure 4, the corplot function creates a graph of a correlation matrix, 
+coloring the regions according to the value correlation coefficients. A correlation 
+value of 1 is considered as a total positive correlation, $-1$ is considered total 
+negative correlation, and if 0 no correlation exists between the variable. Positive 
+correlations are notable between count and hour, temp, wind, visb, dew and solar. 
+There is a negative correlation between count and humidity, rain and snow respectively. 
+These correlation values imply that the weather variables are related to the rental 
+bike count at each hour. 
+
 ```{r}
 ggplot(bike_data, aes(x=Rented_Bike_Count)) +
     geom_histogram(binwidth=110,
                    fill="lightblue", 
                    col="orange",
                    alpha = .8)+
-  labs(title="Fig 1. Histogram for Rented Bike Count", x="Rented Bike Count", y="Count")+
+  labs(title="Figure 1. Histogram for Rented Bike Count", x="Rented Bike Count", y="Count")+
   theme_stata() +
   scale_color_stata() +
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
@@ -201,7 +218,7 @@ ggplot(bike_data, aes(x=Rented_Bike_Count)) +
 # Plot Average count by week 
 ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   geom_bar(stat = "identity") +
-  ggtitle("Fig 2. Average Count by Week")+
+  ggtitle("Figure 2. Average Count by Week")+
   xlab("Day of Week") + 
   ylab("Rent count")  + 
   labs(fill = "Day of Week") + 
@@ -209,22 +226,11 @@ ggplot(bike_data, aes(x=DWeek, y=Rented_Bike_Count ,fill= DWeek))+
   scale_color_stata() +
   theme(plot.title = element_text(hjust = 0.5),legend.position = "None")
 
-# Plot Average count by month
-ggplot(bike_data, aes(x=Month, y=Rented_Bike_Count ,fill= Month))+
-  geom_bar(stat = "identity") +
-  ggtitle("Fig 3. Average Count by Month")+
-  xlab("Month") + 
-  ylab("Rent count")  + 
-  labs(fill = "Month") + 
-  theme_stata() +
-  scale_color_stata() +
-  theme(plot.title = element_text(hjust = 0.5),legend.position = "None",axis.text.x = element_text(angle=-25))
-
 # Plot Average count vs hour by seasons
 ggplot(data=bike_data, aes(x = Hour, y = Rented_Bike_Count, colour = Seasons)) +
    stat_summary(geom = "line", fun = mean)+
    stat_summary(geom = "point", fun = mean)+
-   ggtitle("Fig 4. Average Count vs Hour grouped by Seasons")+
+   ggtitle("Figure 3. Average Count vs Hour grouped by Seasons")+
   xlab("Hour") + 
   ylab("Rent count") 
 
@@ -235,26 +241,9 @@ M <-cor(my_data)
 corrplot(M, method = "color", type = "upper", 
           addCoef.col = "black",number.cex=0.75, tl.col = "darkblue",
          diag = FALSE,col=brewer.pal(n=8, name="RdYlBu"), tl.srt = 30, 
-         title="Fig Correlation Plot" ,
+         title="Figure 4. Correlation Plot" ,
           mar=c(0,0,1,0))
 ```
-Fig 2. displays an average number of the day throughout the week. It is shown that the 
-count distribution follows identical trends over the weekdays and different patterns 
-over the weekends. Fig 3. shows that the average count is high at each hour in the 
-summer and low in the winter. The count is quite similar during autumn and spring. 
-The count abruptly increases in hours 8 and 18. This is because the hours from 8 AM 
-and 6 PM is regarded as the peak hours, during which the usage of the rental bike is 
-high in Seoul.
-
-As shown in Fig.(), the corplot function creates a graph of a correlation matrix, 
-coloring the regions according to the value correlation coefficients. A correlation 
-value of 1 is considered as a total positive correlation, $-1$ is considered total 
-negative correlation, and if 0 no correlation exists between the variable. Positive 
-correlations are notable between count and hour, temp, wind, visb, dew and solar. 
-There is a negative correlation between count and humidity, rain and snow respectively. 
-These correlation values imply that the weather variables are related to the rental 
-bike count at each hour. 
-
 
 ## Evaluation index
 The performance assessment index used here is Root Mean Squared Error (RMSE), which is the standard sample deviation between the observed and the predicted values of the  residuals. RMSE measures the fluctuation of variance regarding different models. The better model is the model with lower RMSE. RMSE is defined by the equation as below.
