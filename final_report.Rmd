@@ -1,7 +1,7 @@
 ---
-title: "Final Report"
-author: "Group 13"
-date: "2021/12/16"
+title: Bike Sharing Demand Prediction in Seoul
+author: Zehua Wang, Ziman Jiang, Faye Fang, Yue Pan
+date: December 17, 2021
 output: pdf_document
 ---
 
@@ -133,7 +133,6 @@ Table 1. Training and test dataset
 | :---        |    :-------------:     | 
 |Training set | 7008 and 17 variables  |
 |Test set     | 1752 and 17 variables  |
-
 ```{r, include=FALSE}
 bike_data <- read.csv("data/SeoulBikeData.csv")
 
@@ -169,16 +168,6 @@ the summer and low in the winter. The count is quite similar during autumn and
 spring. The count abruptly increases in hours 8 and 18. This is because the
 hours from 8 AM and 6 PM are the peak hours, during which the usage of the
 rental bike is high in Seoul.
-
-As shown in Figure 4, the corplot function creates a graph of a correlation
-matrix, coloring the regions according to the value correlation coefficients. A
-correlation value of 1 is considered as a total positive correlation, $-1$ is
-considered the total negative correlation, and if 0 no correlation exists
-between the variables. Positive correlations are notable between count and hour,
-temp, wind, visb, dew and solar. There is a negative correlation between count
-and humidity, rain and snow. These correlation values imply that the weather
-variables are related to the rental bike count at each hour.
-
 
 ```{r}
 p1=ggplot(bike_data, aes(x=Rented_Bike_Count)) +
@@ -233,15 +222,14 @@ ggarrange(p1,p2,p3,p4,nrow=2, ncol=2)
 
 ```
 
-## Evaluation index
-The performance assessment index used here is Root Mean Squared Error (RMSE),
-which is the standard sample deviation between the observed and the predicted
-values of the  residuals. RMSE measures the fluctuation of variance regarding
-different models. The better model is the model with lower RMSE. RMSE is defined
-by the equation as below.
-\begin{align}
-RMSE=\sqrt{\frac{\sum^n_{i=1}(Y_i-\hat{Y_i})^2}{n}}
-\end{align}
+As shown in Figure 4, the corplot function creates a graph of a correlation
+matrix, coloring the regions according to the value correlation coefficients. A
+correlation value of 1 is considered as a total positive correlation, $-1$ is
+considered the total negative correlation, and if 0 no correlation exists
+between the variables. Positive correlations are notable between count and hour,
+temp, wind, visb, dew and solar. There is a negative correlation between count
+and humidity, rain and snow. These correlation values imply that the weather
+variables are related to the rental bike count at each hour.
 
 ## Model development
 It is essential to tuning parameters in order to find the optimal model with
@@ -330,6 +318,11 @@ significantly more important than other variables in predicting rental count.
 Bagging forest results in smaller RMSE than random forest, suggesting that since
 the number of variables is not excessive, increasing variety during feature
 selection is not needed for this dataset.
+
+Random seed setting may lead to different results in neural networks. When
+setting the seed as *625*, the difference between validation mse and test mse is
+large, indicating that the data split is not even. Validation and test mse are
+getting close when changing the seed as *48107*.
 
 ## Citation
 
