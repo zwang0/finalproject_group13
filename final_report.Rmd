@@ -79,19 +79,16 @@ could bring higher predictive accuracy, having better performance in minimizing
 MSE.
 
 ### Support Vector Machine
-Support Vector Machine(SVM) was designed for classification, and later the idea
-was generalized to regression.[2] The optimization idea in SVM classification is
-to increase the amount of separation between two classes. However, in SVM
+Support Vector Machine(SVM) was designed for classification, gand later the idea
+was generalized to regression. SVM regression is used in this project. In SVM
 regression, we would like to form a "band" around the true regression function
 that contains most of the points. With this purpose, the loss function is
-defined as below.
-\begin{align}
-\mu(x)=\beta_0 + x^T\beta
-\end{align}
+defined as below. 
+\begin{align} \mu(x)=\beta_0 + x^T\beta \end{align} 
 If the point (X,Y) = (x,y) is such that $|y-\mu(x)|\leq \epsilon$, then the loss
-is taken to be zero; if $|y-\mu(x)|\geq \epsilon$, then the loss is taken to be
-$|y-\mu(x)|- \epsilon$. The main goal is to find a $\mu(x)$ such that most
-points with the loss taken to be zero.
+is taken to be zero; otherwise the loss is taken to be $|y-\mu(x)|- \epsilon$.
+The main goal is to find a $\mu(x)$ such that most points with the loss taken to
+be zero.
 
 ### Neural Network
 Neural networks (NNs) are computing systems inspired by the way biological
