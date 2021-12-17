@@ -100,7 +100,11 @@ to avoid model overfitting and improve the robustness and generality.
 
 ## Dataset description
 
-## Evaluation indices
+## Evaluation index
+The performance assessment index used here is Root Mean Squared Error (RMSE), which is the standard sample deviation between the observed and the predicted values of the  residuals. RMSE measures the fluctuation of variance regarding different models. The better model is the model with lower RMSE. RMSE is defined by the equation as below.
+\begin{align}
+RMSE=\sqrt{\frac{\sum^n_{i=1}(Y_i-\hat{Y_i})^2}{n}}
+\end{align}
 
 ## Model development
 It is essential to tuning parameters in order to find the optimal model with
@@ -127,6 +131,16 @@ models are not as good as the one without dropping input.
 
 
 ## Result
+
+ Method | Training | Testing
+   -    |    -     |   -
+ LM     | 407.0000 | 417.0000
+ Ridge  | 427.1653 | 437.7671
+ LASSO  | 427.3688 | 437.4730
+ RF     | 224.6018 | 222.9583
+ BagF   | 184.1149 | 182.7463
+ SVM    | 226.5303 | 221.5075
+ NN     | 120.0056 | 133.2593
 
 ## Discussion
 

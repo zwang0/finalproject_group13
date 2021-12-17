@@ -2,6 +2,12 @@ linear.model <- lm(Rented_Bike_Count ~ Hour + Temperature + Humidity + Wind_spee
 
 summary(linear.model)
 
+#RMSE for training set
+lm.train <- predict(linear.model)
+lm.trian.MSE <- crossprod(lm.train - trainset[,1]) / nrow(trainset)
+lm.trian.RMSE <- sqrt(lm.trian.MSE)
+
+#RMSE for testing set
 lm.pred <- predict(linear.model, testset[,-1])
 lm.MSE <- crossprod(lm.pred - testset[,1]) / length(testindex)
 lm.RMSE <- sqrt(lm.MSE)
