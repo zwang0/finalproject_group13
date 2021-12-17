@@ -64,7 +64,7 @@ $|y-\mu(x)|- \epsilon$. The main goal is to find a $\mu(x)$ such that most
 points with the loss taken to be zero.
 
 ### Neural Network
-Neural networks (ANNs), also known as artificial neural networks (ANNs), are
+Neural networks (NNs), also known as artificial neural networks (ANNs), are
 computing systems inspired by the way biological neural networks in the human
 brain process information. Building Neural networks is a widely adopted method
 in machine learning. The tasks to which neural networks are applied tend to fall
@@ -103,7 +103,27 @@ to avoid model overfitting and improve the robustness and generality.
 ## Evaluation indices
 
 ## Model development
+It is essential to tuning parameters in order to find the optimal model with
+relatively low loss or error values.
 
+When building neural networks, we have tried different size of the hidden
+layers. Greater number of nodes in the layer indicates more parameters would be
+used for training and model fitting. We believe that it is more likely to fit a
+model with more parameters. Hence we add the hidden layers from 5, the starting
+model, to 8, the final optimal model. We also try different number of nodes
+ranging from 1 to 512 in different layers. There are more nodes in the first few
+hidden layers, and the nodes number keep reducing until the size of output
+(which is 1 since we only need to make a prediction of the number of rented
+bike).
+
+However, large number of parameters may also bring the problem: overfit. To
+solve this problem, we constraint the complexity of the model. No more than 8
+hidden layers and no more than 512 number of nodes in each layers. Typically, we
+adopt 256 or 64 nodes per layer. Futhermore, we introduce regularizers that add
+L1 or L2 penalty to the model during training base on the magnitude of the
+activation. We also try to randomly dropout a portion (i.e. 20%) of the input in
+specific layer while training. But later we find that the performance of these 
+models are not as good as the one without dropping input.
 
 
 ## Result
